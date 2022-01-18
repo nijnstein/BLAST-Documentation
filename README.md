@@ -6,7 +6,7 @@ Scripts can be compiled at runtime from any text source and they can be store in
 ## SSMD
 ### Single Script Multiple Data
 
-In many large scale simulations many scripts are mostly the same but with different data. BLAST can execute those with the control flow inverted, meaning that it in essence performs the SIMD equivelent of scripting languages, each operation will translate in a vector operation easily compiled to beautiful packed assembly. This can result in script running faster then native code dueue to the ways memory is forced to be and execution is performed. Usually this kind of optimization is not simply possible in real-life situations with compiled code. In SSMD mode, BLAST can handle 5 script expression each nano-second, this is offcoarse averaged over the bulk but it shows how it becomes possible to optimize otherwise hard to optimize parts, especially if they were entered by a user in an online game were there is no control. 
+In many large scale simulations many scripts are mostly the same but with different data. BLAST can execute those with the control flow inverted, meaning that it in essence performs the SIMD equivelent of scripting languages, each operation will translate in a vector operation easily compiled to beautiful packed assembly. This can result in script running faster then native code dueue to the ways memory is forced to be and execution is performed. Usually this kind of optimization is not simply possible in real-life situations with compiled code. In SSMD mode, BLAST can handle scripts faster then native code in single execution. It shows how it becomes possible to optimize otherwise hard to optimize parts, especially if they were entered by a user in an online game were there is no control. 
 
 ### Features 
 
