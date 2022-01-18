@@ -36,9 +36,9 @@ Currently a variable is promoted to an id by use of a function: `a_as_id = ID64;
 
 A statement is: 
 - a collection of operations assigned to a variable terminated with a `;`: `a = 1 * 3 + maxa((1 2 3), (5 6 7));` 
-- a procedure call: 'procedure_identifier(12);' 
+- a procedure call: 'procedure_identifier( maxa(1,2,3));`
 
-Control flows may nest statements statements:
+Control flows can nest statements:
 
 - If Then Else:  `if ( a | b ) then ( c = 1; ) else ( c = 2; );`
 - While loop: `while( i < 100) ( i = i + 1;);`
@@ -56,7 +56,7 @@ Everything between  `(` and `)` is called a compound, a compound may have severa
 - A list of parameters: `(a, b, c);`
 - A vector definition: `a = (1 2 3 4);`
 
-## Data types 
+#### Data Types & Sizes 
 
 There is limited datatype support: 
 
@@ -70,22 +70,42 @@ Vectors:  ID(n) and NUMERIC(n) up until n = 16,
           id(3)       => (1 2 3)
           NUMERIC(3)  =>  (1.2 2.3 2.45)
 ```
-### NUMERIC  
-The default datatype is the numeric, unless otherwise set the compiler assumes the numeric datatype which is a 32 bit float. 
 
-### ID
-The ID datatype is used to represent an ID, because numerics will not round correctly on indices with more then 6/7 digits the ID is used to correct index large lists.
+##### External Data Access 
+
+BLAST connects to its enviroment in several ways
+
+- data can be communicated through the packagadata of the script by setting up its values
+- data can be mapped to a DOTS IComponentData structure
+- data can be exchanged through functionpointers registered in BLAST connection data from your simulation with the script engine. 
+
+##### No Native Array Support
+
+BLAST will not directly support arrays or pointers as datatypes. Instead it expects users to create an api to their simulation to query by the script. Its straightforward to devise functions in unity and connect them to blast and to end up like so: 
+
+```
+ while(i < get_actor_count())
+ (
+     m1 = get_actor_data(i); 
+ )
+
+```
+
+_ This will also allow us to cache data efficiently in future versions. _
+
 
 ### Vectors
 Vectors may be defined based on all supported datatypes and functions, constant and functions may be mixed but the number of dataelements must be equal for each element defined in the vector. 
-
-
 
 1> Defines a, a vector of 2 constants and 1 pop operation popping 1 numeric or id:
 ` a = (1 pop 2); `
 
 2> Defines b, a vector of 2 constants of size 3 and a pop3:
 ` b = ((1 2 3) (pop pop pop) (1 2 3)); ` 
+
+- Vectors can be used in all operations that can be used with other variables of the same datatype (numeric, id)
+- Due to restrictions set by the project we will not allow unlimited vector length (see arrays), this depends on a function used to decode the opcodes for functions and that in turn depends on the language version (information follows) 
+- The minimal support will (in all languageversions) be: size 1, 2, 3 and 4; 
 
 #### Vector mapping assumptions
 Vectors map automatically to matrices of the same element size: n(9) => m(3x3), n(12) => m(3x4) | m(4x3) etc. 
