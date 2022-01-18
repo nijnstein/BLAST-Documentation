@@ -19,8 +19,10 @@ In many large scale simulations many scripts are mostly the same but with differ
 - Editor/Build time functionality to convert scripts into bursted function pointers with no difference in usage to the developer but with native performance.
 - SSMD mode, executes multiple script with simular controlflow but different data at once as if they were vectors
 - Hybrid register/stackbased interpretor 
-- Unmatched performance. 
 - Interpretation is BURST compatible.
+- Unmatched performance. 
+
+<img width="80%" alt="BLAST with BURST" src="https://user-images.githubusercontent.com/96932314/149854610-540e2ae4-2cb8-4502-8db4-b3b3ed9a4c71.PNG">
 
 ## Usage
 
