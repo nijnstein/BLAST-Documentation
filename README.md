@@ -24,8 +24,37 @@ In many large scale simulations many scripts are mostly the same but with differ
 
 <img width="80%" alt="BLAST with BURST" src="https://user-images.githubusercontent.com/96932314/149854610-540e2ae4-2cb8-4502-8db4-b3b3ed9a4c71.PNG">
 
-## Usage
+### Code Structure 
 
+#### Variables 
+
+Variables dont need to be defined although users might want to force usage of the ID datatype. All data starts out as a float in BLAST and either grows into vectors or gets converted/defined as an ID. For blast its assumed that float is the prefered datatype.
+
+Currently a variable is promoted to an id by use of a function: `a_as_id = ID64;  a_as_id = ID64(value); `, functions in blast may convert datatypes and allow us to cleanly configure datatypes used outside the interpretor. Leveraging this we could release float or ID only interpretors for maximum speed in the future. 
+
+#### Statements 
+
+A statement is: 
+- a collection of operations assigned to a variable terminated with a `;`: `a = 1 * 3 + maxa((1 2 3), (5 6 7));` 
+- a procedure call: 'procedure_identifier(12);' 
+
+Control flows may nest statements statements:
+
+- If Then Else:  `if ( a | b ) then ( c = 1; ) else ( c = 2; );`
+- While loop: `while( i < 100) ( i = i + 1;);`
+- For loop: `for( i = 0; i < 100; i = i + 1) ( a = a / 4; );` 
+- Switch: `switch (a) (case 3: ( a = 2; ) default: ( a = 3;));`
+
+_The intitial language version will demand use of compounds in all situations. Later version may relax on this constraint. _
+
+#### Compounds 
+
+Everything between  `(` and `)` is called a compound, a compound may have several interpretations: 
+
+- A list of statements: `( a = 1; b = 2; c = a * b; );` 
+- Structuring of sequences: `a = a + (a | b);`
+- A list of parameters: `(a, b, c);`
+- A vector definition: `a = (1 2 3 4);`
 
 ## Data types 
 
@@ -50,9 +79,10 @@ The ID datatype is used to represent an ID, because numerics will not round corr
 ### Vectors
 Vectors may be defined based on all supported datatypes and functions, constant and functions may be mixed but the number of dataelements must be equal for each element defined in the vector. 
 
+
+
 1> Defines a, a vector of 2 constants and 1 pop operation popping 1 numeric or id:
 ` a = (1 pop 2); `
-
 
 2> Defines b, a vector of 2 constants of size 3 and a pop3:
 ` b = ((1 2 3) (pop pop pop) (1 2 3)); ` 
