@@ -386,7 +386,7 @@ ae = 1 & 2 & 3 & 4 & 5;
 ag = 1 * 10 * 3 * (3 + 4 * 2);
 ```
 
-Vector example with some script debuging features:
+Vector example with some script debuging features and insights into BLAST's stack usage, it uses less data and code bytes while keeping execution flat for the interpretation:
 ```
 
  a = maxa((1 2 3), (4 5 6), (7 8 9));
@@ -444,7 +444,7 @@ Vector example with some script debuging features:
 # Blast.Debug - codepointer: 29, id: 128, NUMERIC: 9,00, vectorsize: 1
 # 
 # DATA  0 = 9   1  Numeric        // [0] == numeric[1] assigned by var a 
-# DATA  1 = 5   1  Numeric        // [1] == 5 => numeric data, not in constants  
+# DATA  1 = 5   1  Numeric        // [1] == 5 => numeric data, not in constants  ** NOTE HOW VECTORS USE STACK MEMORY **
 # DATA  2 = 6   1  Numeric        // [2] == 6 => numeric data, not in constants 
 # DATA  3 = 7   1  Numeric        // [3] == 7 => numeric data, not in constants 
 # DATA  4 = 9   1  Numeric        // [4] == 8 => numeric data, not in constants    
