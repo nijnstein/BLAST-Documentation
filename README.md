@@ -386,7 +386,7 @@ ae = 1 & 2 & 3 & 4 & 5;
 ag = 1 * 10 * 3 * (3 + 4 * 2);
 ```
 
-Vector example with some script debuging features and insights into BLAST's stack usage, it uses less data and code bytes while keeping execution flat for the interpretation:
+Vector example with some script debuging features and insights into BLAST's stack usage, it uses less data and code bytes while keeping execution flat for the interpretation allowing it to use less memory on the target cpu:
 ```
 
  a = maxa((1 2 3), (4 5 6), (7 8 9));
