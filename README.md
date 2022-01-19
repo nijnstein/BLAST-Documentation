@@ -386,3 +386,66 @@ ae = 1 & 2 & 3 & 4 & 5;
 ag = 1 * 10 * 3 * (3 + 4 * 2);
 ```
 
+Vector example with some script debuging features:
+```
+
+ a = maxa((1 2 3), (4 5 6), (7 8 9));
+  
+ debug(a); 
+ debugstack(); 
+
+# compiler node tree
+# 
+#    root of 6 
+#       function push 
+#           vector compound statement of 3 
+#             constant parameter 7 
+#             constant parameter 8 
+#             constant parameter 9 
+#          /
+#       /
+#       function push 
+#           vector compound statement of 3 
+#             constant parameter 4 
+#             constant parameter 5 
+#             constant parameter 6 
+#          /
+#       /
+#       function push 
+#           vector compound statement of 3 
+#             constant parameter 1 
+#             constant parameter 2 
+#             constant parameter 3 
+#          /
+#       /
+#       assignment of a 
+#          function maxa 
+#             function pop 
+#             function pop 
+#             function pop 
+#          /
+#       /
+#       compound statement of 1 
+#          function debug 
+#             parameter a 
+#          /
+#       /
+#       compound statement of 1 
+#          function debugstack 
+#       /
+#    /
+# 
+# 
+# 000  024 018 131 089 132 019 024 018 088 129 
+# 010  130 019 024 018 085 086 087 019 001 128 
+# 020  049 013 025 025 025 000 018 255 244 128 
+# 030  019 018 255 243 019 000      
+# 
+# Blast.Debug - codepointer: 29, id: 128, NUMERIC: 9,00, vectorsize: 1
+# 
+# DATA  0 = 9   1  Numeric        // [0] == numeric[1] assigned by var a 
+# DATA  1 = 5   1  Numeric        // [1] == 5 => numeric data, not in constants  
+# DATA  2 = 6   1  Numeric        // [2] == 6 => numeric data, not in constants 
+# DATA  3 = 7   1  Numeric        // [3] == 7 => numeric data, not in constants 
+# DATA  4 = 9   1  Numeric        // [4] == 8 => numeric data, not in constants    
+```
