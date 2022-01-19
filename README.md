@@ -278,14 +278,15 @@ Implementation of a state in a statemachine
 #
 ### Define possible states
 
-#define     IDLE	    1
+#define     IDLE	1
 #define     EXPLORE     2
 #define     FORTIFY     3
-#define     ATTACK	    4 
+#define     ATTACK	4 
 #define     EVADE       5 
 #define     EXPLODE     6
 #define     DESTROYED   7
 
+# this directly maps to an IComponentData of 5 floats:
 #input current_state    0  4
 #input explore_cell     4  4  
 #input attack_target    8  4
@@ -294,8 +295,6 @@ Implementation of a state in a statemachine
 
 # every 60 frames:  check for a target in range 
 counter = counter + 1;
-
-
 if(counter < 60) then 
 ( 
 	current_state = EXPLORE; 
@@ -331,7 +330,6 @@ if(cell_is_explored = 1) then
 (
           explore_cell = current_cell_id; 
 )
-
 
 # reached target of exploration or cell already explored -> select new target 
 if(explore_cell = current_cell_id) then
