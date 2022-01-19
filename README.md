@@ -111,7 +111,7 @@ Vectors may be defined based on all supported datatypes and functions, constant 
 Vectors map automatically to matrices of the same element size: n(9) => m(3x3), n(12) => m(3x4) | m(4x3) etc. 
 
 #### Language Versions
-Different language version allow the interpretor(s) to differntiate between very distinct outputs depending on compiler settings. 
+Different language versions allow the interpretor(s) to differntiate between very distinct outputs depending on compiler settings. 
 
 
 ##### BS1 
@@ -191,19 +191,19 @@ Enable the optimizing functions of the compiler:
 Different package modes for different needs: 
 
 - Normal: code, metadata, data and stack combined
-- SSMD: code and metadata seperated from data & stack in 2 seperate segements, stack can usually best be omitted with the `NoStack` option. 
+- SSMD: code and metadata seperated from data & stack in 2 seperate segments, stack can usually best be omitted with the `NoStack` option. 
 - Entity: code is seperated from metadata, data and stack which are mapped onto an IComponentData 
 - Compiler: mode for internal and debugging purposes, this will maintain a node tree and variable overviews.
 
 ##### HPC Compilation
-Allow BLAST to compile the script into c# burst compatible function pointers, this allows native performance for know scripts while keeping the same workflow in decision libraries. This way there is no performance hit running compile time known scripts at runtime in your simulation. Only runtime compiled scripts will take the performance hit of being interpreted. This will allow the developer to create 1 code path and to not worry too much about performance. Note however, for SSMD operation the compiler will still need bytecode as it is not possible to run in single script multiple data mode using native compiled code. 
+Allow BLAST to compile the script into c# burst compatible function pointers, this allows native performance for known scripts while keeping the same workflow in decision libraries. This way there is no performance hit running compile time known scripts at runtime in your simulation. Only runtime compiled scripts will take the performance hit of being interpreted. This will allow the developer to create 1 code path and to not worry too much about performance. Note however, for SSMD operation the compiler will still need bytecode as it is not possible to run in single script multiple data mode using native compiled code. 
 
 - an example of use would be updating behaviour or balancing scripts in multiplayer games on server login, a later binary update of the game might provide the same scripts hardcoded in an update without any alteration in code paths for the developer of that game. 
 
 This should void a big drawback of using a scripting engine to do a lot of tasks in a simulation where every millisecond counts.
 
 ##### NoStack 
-Dont allocate package memory for stacks
+Dont allocate package memory for stacks, instead uses interpretor's stack.
 
 #### Data Access 
 
