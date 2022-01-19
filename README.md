@@ -222,5 +222,169 @@ Dont allocate package memory for stacks, instead uses interpretor's stack.
 
 
 
+### Example Scripts
 
+Validation script as used in some tests: 
+```
+#define result_1 11111
+#define result_2 22222
+
+b = b * 1 * 1 * 1 * (1 / 10) * 1;
+
+a = 1 + 1;
+b = 1 * -2 * 3 * 4; 
+c = 1 * (2 * 3 / 4) * 5;      # 1.5 * 5 = 7.5
+
+if(a = 1) then ( d = 122 ) else ( d = 100 );
+
+while(a <= d) 
+(
+    a = a + 1; 
+    b = b * 1 * 1 * 1 * 1 / 10 * 1;     
+)
+
+switch(a > b)
+(
+  case 1:
+  (
+    e = result_1; 
+  )
+  default:
+  (
+    e = result_2;
+  )
+);
+ 
+f = 1.1;
+g = sqrt(2);  
+h = max(f, g);
+
+for(i = 5; i < 15; i = i + 1)
+(
+	h = h + 1; 
+)
+
+#validate e 11111                 
+#validate a 101              
+#validate c 7.5
+#validate h 11.4142       
+```
+
+
+Implementation of a state in a statemachine
+```
+#
+# HOVERTANK STATEMACHINE
+#
+### Define possible states
+
+#define     IDLE	    1
+#define     EXPLORE     2
+#define     FORTIFY     3
+#define     ATTACK	    4 
+#define     EVADE       5 
+#define     EXPLODE     6
+#define     DESTROYED   7
+
+#input current_state    0  4
+#input explore_cell     4  4  
+#input attack_target    8  4
+#input counter         12  4
+#input current_cell_id 16  4
+
+# every 60 frames:  check for a target in range 
+counter = counter + 1;
+
+
+if(counter < 60) then 
+( 
+	current_state = EXPLORE; 
+	return;
+)
+
+counter = 0;
+attack_target = FindClosestTarget(); 
+
+# if there is a target attack it
+if(attack_target >= 0) then 
+(
+	current_state = ATTACK; 
+	StopMovement();
+	return; 
+)
+
+# otherwise keep exploring 
+current_state = EXPLORE; 
+
+# no current explore target -> select new target and start moving to it 
+if(explore_cell <= 0) then
+(
+	explore_cell = ExploreIsland(); 
+	if(explore_cell > 0) then ( MoveToCellId(explore_cell); );
+)
+
+current_cell_id = GetCurrentCellId(); 
+
+# if the cell we are exploring became explored -> find another target 
+cell_is_explored = CellIsExplored(explore_cell); 
+if(cell_is_explored = 1) then 
+(
+          explore_cell = current_cell_id; 
+)
+
+
+# reached target of exploration or cell already explored -> select new target 
+if(explore_cell = current_cell_id) then
+(
+          explore_cell = ExploreIsland(); 
+	if(explore_cell > 0) then ( MoveToCellId(explore_cell); ) 
+)
+
+# no target to explore, nothing to attack -> fortify until other goals apply
+if(explore_cell < 0) then
+(
+	current_state = FORTIFY; 
+	StopMovement();
+)
+
+```
+
+
+Various operations for testing:
+```
+
+a = 1 * -2;						
+b = -1 * 2;						
+c = a / b;						
+d = c * 100;					
+e = 1 + 2 * 2; 					
+f = 1 + 2 * 2 + 5;				
+g = 1 + 2 / 6;					    
+h = 1 + -2 / 6;					
+i = 1 - 2 * 2 + 5;				 
+j = 1 + 2 * 2 - 5;				 
+k = 1 +-2 * 2 + 5;				 
+l = 1 + 1 + 1;                  # should all optimize to adda or suba
+m = 1 - 1 - 1 - 1; 
+n = 1 + 1 + 1 + 1 + 1;
+o = 1 - 1 - 1 - 1 - 1 + 1 + 1;  # suba and adda 
+t = 1 + 1 + 1 + 1 + 1 + 1 + 1;  # 1 more then in patterns  
+p = 2 * 2 * 2;		  # should all optimize to mula
+q = 2 * 2 * 2 * 2;	
+r = 2 * 2 * 2 / 2 * 2;	  # division is inverted by analyser, optimizer converts to mula
+s = a * e * j * g * v / 2; 	    
+u = 2 * 2 * 2 * 2 * 2 * 2 * 2;  
+v = 2 / 2 / 2 / 2 / 2 / 2; 	
+w = a / b / c / d;            
+x = a * (b / 2) * 2;
+y = (a * b) * 2;
+z = (a * b) + b * (a + b);
+ 
+aa = 1 + 1 * (1 / 2) * 2;	
+ab = 2 * (2 * 2 * 2) * 2;  
+ac = 2 - 2 - 2 - 2 - 2 - 2; 
+ad = 1 & -2 | 1;        	
+ae = 1 & 2 & 3 & 4 & 5;	
+ag = 1 * 10 * 3 * (3 + 4 * 2);
+```
 
