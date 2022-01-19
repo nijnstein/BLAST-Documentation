@@ -94,7 +94,7 @@ BLAST will not directly support arrays or pointers as datatypes. Instead it expe
 _ This will also allow us to cache data efficiently in future versions. _
 
 
-### Vectors
+#### Vectors
 Vectors may be defined based on all supported datatypes and functions, constant and functions may be mixed but the number of dataelements must be equal for each element defined in the vector. 
 
 1> Defines a, a vector of 2 constants and 1 pop operation popping 1 numeric or id:
@@ -105,12 +105,28 @@ Vectors may be defined based on all supported datatypes and functions, constant 
 
 - Vectors can be used in all operations that can be used with other variables of the same datatype (numeric, id)
 - Due to restrictions set by the project we will not allow unlimited vector length (see arrays), this depends on a function used to decode the opcodes for functions and that in turn depends on the language version (information follows) 
-- The minimal support will (in all languageversions) be: size 1, 2, 3 and 4; 
+- The minimal support will (in all languageversions) be: size 1, 2, 3 and 4; other sizes are under discussion as the current encoding schema allows for only 8 different lengths (8 differing lengths, not max 8)
 
-#### Vector mapping assumptions
+##### Vector mapping assumptions
 Vectors map automatically to matrices of the same element size: n(9) => m(3x3), n(12) => m(3x4) | m(4x3) etc. 
 
-## Tokens
+#### Language Versions
+Different language version allow the interpretor(s) to differntiate between very distinct outputs depending on compiler settings. 
+
+
+##### BS1 
+
+
+
+##### BS2
+
+
+
+##### HPC
+
+
+
+#### Script Tokens
 
 Arithmetic operators:   `+ - / *`
 
@@ -118,7 +134,7 @@ Boolean operators:      `& | ^ !`
 
 Boolean evaluators:     `< > <= >= = ! !=`
 
-Ternary operator:       `[condition] ? [true] : [false]` 
+Ternary operator:       `[condition] ? [true] : [false]`   **BS2**
 
 Assignment:             `=`
 
@@ -130,19 +146,20 @@ Value seperator:        `,`
 
 Decimal seperator:      `.` 
 
-Indexer                 `.` 
+Indexer                 `.`  
 
-IndexOpen               `[`
+IndexOpen               `[`   **BS2**
 
-IndexClose              `]`
+IndexClose              `]`   **BS2**
 
 Identifier: 	          `[a..z][0..9|a..z]*[.|[][a..z][0..9|a..z]*[]]`
 
 Control Flow:           `if then else` 
-                        `while for ` 
+                        `while | for loops` 
                         `switch case default`
+                        
 
-## Code Structure
+#### Compiler Defines 
 
 The # is used to define constants, input and output(s) and validations. Any sequence not matching `#[define/input/output/validate]` is considered a comment. 
 
@@ -150,12 +167,12 @@ The # is used to define constants, input and output(s) and validations. Any sequ
 - Defines and inputs must appear in the code BEFORE any other code 
 - A comment can be started at any point in the line
 
-### Use of #
+##### Compiler Define Examples
 ``` 
-#define   variable  [value]
-#input    variable  [offset] [bytesize]
-#output   variable  [offset] [bytesize]
-#validate variable  [value] 
+#define   variable  1234
+#input    variable  0 4
+#output   variable  4 8 
+#validate variable  a 123
 ``` 
 
 All other text that starts with # is a comment and may start at any point of a line, also after `#[definition]`:
@@ -163,3 +180,47 @@ All other text that starts with # is a comment and may start at any point of a l
 ``` 
 #input    variable  [offset] [bytesize]    # comment 123
 ``` 
+
+#### Compiler Settings 
+
+##### Optimizer 
+Enable the optimizing functions of the compiler:
+- for now only bytecode pattern recognition is used
+- 
+##### PackageMode
+Different package modes for different needs: 
+
+- Normal: code, metadata, data and stack combined
+- SSMD: code and metadata seperated from data & stack in 2 seperate segements, stack can usually best be omitted with the `NoStack` option. 
+- Entity: code is seperated from metadata, data and stack which are mapped onto an IComponentData 
+- Compiler: mode for internal and debugging purposes, this will maintain a node tree and variable overviews.
+
+##### HPC Compilation
+Allow BLAST to compile the script into c# burst compatible function pointers, this allows native performance for know scripts while keeping the same workflow in decision libraries. This way there is no performance hit running compile time known scripts at runtime in your simulation. Only runtime compiled scripts will take the performance hit of being interpreted. This will allow the developer to create 1 code path and to not worry too much about performance. Note however, for SSMD operation the compiler will still need bytecode as it is not possible to run in single script multiple data mode using native compiled code. 
+
+- an example of use would be updating behaviour or balancing scripts in multiplayer games on server login, a later binary update of the game might provide the same scripts hardcoded in an update without any alteration in code paths for the developer of that game. 
+
+This should void a big drawback of using a scripting engine to do a lot of tasks in a simulation where every millisecond counts.
+
+##### NoStack 
+Dont allocate package memory for stacks
+
+#### Data Access 
+
+##### Direct Data|Stack Access
+
+##### Mapping to IComponentData
+
+##### Communication through external fucntions
+
+
+#### Interpretor 
+
+##### SSMD Operation
+
+#### Error Handling 
+
+
+
+
+
