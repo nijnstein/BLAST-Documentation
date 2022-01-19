@@ -222,6 +222,31 @@ Dont allocate package memory for stacks, instead uses interpretor's stack.
 
 
 
+### Functions 
+
+#### Built in
+
+#### External
+
+##### Delegates 
+
+#### Parameters 
+Parameters are identifiers or sequences of operations seperated by a `,` and may be:
+
+- values 
+- operation sequences resulting in values
+- other functions
+- vectors
+
+#### Functioncall Examples 
+
+```
+ a = max (1, 2);
+ a = max ((1 1), (2 2));
+ a = max (a, 1, max(a, 2));
+ a = max (a - b, a + max(a, 2)); 
+```
+
 ### Example Scripts
 
 Validation script as used in some tests: 
