@@ -66,7 +66,7 @@ Numeric: 1.0 etc
 
 ID: Integers
 
-Vectors:  ID(n) and NUMERIC(n) up until n = 16, 
+Vectors:  ID(n) and NUMERIC(n), 
           id(3)       => (1 2 3)
           NUMERIC(3)  =>  (1.2 2.3 2.45)
 ```
