@@ -475,8 +475,11 @@ Vector example with some script debuging features and insights into BLAST's stac
 # DATA  4 = 9   1  Numeric        // [4] == 8 => numeric data, not in constants    
 ```
 
-Example output for nested functions, the results are pushed and popped when needed. This ensures no recursion or stacking of register data during interpretation.
+
+Example output for nested functions, the results are pushed and popped when needed. This ensures no recursion or stacking of register data during interpretation. The script code `debug(max((1 + 2), 2)); ` or `debug(max(1 + 2, 2));` results int the following output:
 ```
+    
+
    root of 3 
       function pushc 
          constant parameter 1 
