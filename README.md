@@ -474,3 +474,31 @@ Vector example with some script debuging features and insights into BLAST's stac
 # DATA  3 = 7   1  Numeric        // [3] == 7 => numeric data, not in constants 
 # DATA  4 = 9   1  Numeric        // [4] == 8 => numeric data, not in constants    
 ```
+
+Example output for nested functions, the results are pushed and popped when needed. This ensures no recursion or stacking of register data during interpretation.
+```
+   root of 3 
+      function pushc 
+         constant parameter 1 
+         operation Add 
+         constant parameter 2 
+      /
+      function pushf 
+         function max 
+            function pop 
+            constant parameter 2 
+         /
+      /
+      function debug 
+         function pop 
+      /
+   /
+
+000| push compound 1 + 2 nop push function max ^ pop 2 
+010| debug pop nop 
+
+000| 030 085 002 086 000 029 042 009 025 086 
+010| 255 253 025 000 
+
+Blast.Debug - codepointer: 12, id: 25, NUMERIC: 3,00, vectorsize: 1
+```
