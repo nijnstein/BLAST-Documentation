@@ -505,3 +505,55 @@ Example output for nested functions, the results are pushed and popped when need
 
 Blast.Debug - codepointer: 12, id: 25, NUMERIC: 3,00, vectorsize: 1
 ```
+
+Example output for nested vector operations with negative constants encoded in bytecode:
+```
+   [InlineData("a = ((2 2 2 2) * (2, -2 2 2)) * (4 4 4 4);", 16)]
+
+   root of 6 
+       vector[4]function pushv 
+         constant parameter 2 
+         constant parameter 2 
+         constant parameter 2 
+         constant parameter 2 
+      /
+      function pushc 
+         operation Substract 
+         constant parameter 2 
+      /
+       vector[4]function pushv 
+         constant parameter 2 
+         function pop 
+         constant parameter 2 
+         constant parameter 2 
+      /
+       vector[4]function pushc 
+          vector[4]function pop 
+         operation Multiply 
+          vector[4]function pop 
+      /
+       vector[4]function pushv 
+         constant parameter 4 
+         constant parameter 4 
+         constant parameter 4 
+         constant parameter 4 
+      /
+       vector[4]assignment of a 
+          vector[4]function pop 
+         operation Multiply 
+          vector[4]function pop 
+      /
+   /
+   
+000| push vector  68 2 2 2 2 push compound - 2 nop 
+010| push vector  68 2 pop 2 2 push compound pop * pop 
+020| nop push vector  68 4 4 4 4 set a pop 
+030| * pop nop nop 
+
+000| 026 068 086 086 086 086 030 003 086 000 
+010| 026 068 086 025 086 086 030 025 005 025 
+020| 000 026 068 088 088 088 088 001 128 025 
+030| 005 025 000 000 
+
+
+```
