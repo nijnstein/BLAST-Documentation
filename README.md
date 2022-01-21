@@ -507,6 +507,8 @@ Blast.Debug - codepointer: 12, id: 25, NUMERIC: 3,00, vectorsize: 1
 ```
 
 Example output for nested vector operations with negative constants encoded in bytecode, although the output is flattened into 6 statements which seems more work its actually faster to execute because by pushing stuff on the stack the datatype becomes fixed for the interpretor and it wont need to grow vectors value by value, also not processing nested compounds but instead executing them in a linear fashion ensures less function stack use for the code running the interpretation (more constant memory). 
+
+**Note that for this test the optimizer is disabled as it should remove the unneeded compound resulting in less statements to execute. **
 ```
    [InlineData("a = ((2 2 2 2) * (2, -2 2 2)) * (4 4 4 4);", 16)]
 
