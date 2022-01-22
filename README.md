@@ -585,4 +585,4 @@ Resulting nodes and bytecode:
 000| 001 128 033 017 085 129 130 131 000 
 ``` 
 
-
+For now the optimizer will only look at single nodes and will mainly perform replacements of operation sequences. A string of additions is better executed as a function where more information is known about its result and it reduces control flow in the interpretor. 
