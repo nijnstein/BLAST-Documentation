@@ -559,3 +559,30 @@ Example output for nested vector operations with negative constants encoded in b
 
 
 ```
+
+#### Basic optimizer features: 
+
+This demonstrates inverse replacements on division by constants followed by remapping the multiplication sequence into a function call.
+
+Input code segment: `a = 1 / 2.1 / 3.2 / 4.3;`
+
+Resulting nodes and bytecode: 
+
+``` 
+   root of 1 
+      assignment of a 
+         function mula 
+            constant parameter 1 
+            constant parameter 0,4761905 
+            constant parameter 0,3125 
+            constant parameter 0,23255813 
+         /
+      /
+   /
+
+000| set a mula yield 1 0,4761905 0,3125 0,23255813 nop
+
+000| 001 128 033 017 085 129 130 131 000 
+``` 
+
+
