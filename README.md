@@ -113,7 +113,6 @@ Vectors map automatically to matrices of the same element size: n(9) => m(3x3), 
 #### Language Versions
 Different language versions allow the interpretor(s) to differntiate between very distinct outputs depending on compiler settings. 
 
-
 ##### BS1 
 
 
@@ -191,9 +190,22 @@ Enable the optimizing functions of the compiler:
 Different package modes for different needs: 
 
 - Normal: code, metadata, data and stack combined
+```
+        [----CODE----|----METADATA----|----DATA----|----STACK----]
+                     1                2            3             4  
+```
 - SSMD: code and metadata seperated from data & stack in 2 seperate segments, stack can usually best be omitted with the `NoStack` option. 
+```
+        [----CODE----|----METADATA----]       [----DATA----|----STACK----]
+                     1                2                    3             4
+``` 
 - Entity: code is seperated from metadata, data and stack which are mapped onto an IComponentData 
+``` 
+         [----CODE----]      [----METADATA----|----DATA----|----STACK----]
+                      1                       2            3             4
+``` 
 - Compiler: mode for internal and debugging purposes, this will maintain a node tree and variable overviews.
+
 
 ##### HPC Compilation
 Allow BLAST to compile the script into c# burst compatible function pointers, this allows native performance for known scripts while keeping the same workflow in decision libraries. This way there is no performance hit running compile time known scripts at runtime in your simulation. Only runtime compiled scripts will take the performance hit of being interpreted. This will allow the developer to create 1 code path and to not worry too much about performance. Note however, for SSMD operation the compiler will still need bytecode as it is not possible to run in single script multiple data mode using native compiled code. 
