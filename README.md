@@ -184,8 +184,12 @@ All other text that starts with # is a comment and may start at any point of a l
 
 ##### Optimizer 
 Enable the optimizing functions of the compiler:
-- for now only bytecode pattern recognition is used
-- 
+
+- Node Optimizer -> converts sequences of operations into more efficient operations after the ast has been made flat.
+- **Deprecated** Bytecode Optimizer -> pattern recognition and replacement for optimized execution, improvements in the node analyzer will probably make it less and less usefull, but still it can perform optimizations fast compared to deeper methods of analyzing/optimizing.
+- **V3** AST Optimizer -> operates on node structure and will optimize more complex patterns accross multiple nodes.
+
+
 ##### PackageMode
 Different package modes for different needs: 
 
