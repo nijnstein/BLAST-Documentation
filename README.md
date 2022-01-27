@@ -608,5 +608,4 @@ Resulting nodes and bytecode:
 
 For now the optimizer will only look at single nodes and will mainly perform replacements of operation sequences. A string of additions is better executed as a function where more information is known about its result and it reduces control flow in the interpretor. 
 
-![blast icon](https://user-images.githubusercontent.com/96932314/151461223-733fb1de-5337-4e82-9b50-184d42da2928.png)
 
