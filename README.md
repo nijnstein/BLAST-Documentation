@@ -28,7 +28,7 @@ In many large scale simulations many scripts are mostly the same but with differ
 
 ### Code Structure 
 
-[Blast Namespace](Documentation\N_NSS_Blast.md)
+[Blast Namespace](\Documentation\N_NSS_Blast.md)
 
 #### Variables 
 
