@@ -28,6 +28,8 @@ In many large scale simulations many scripts are mostly the same but with differ
 
 ### Code Structure 
 
+[Blast Namespace](Documentation\N_NSS_Blast.md)
+
 #### Variables 
 
 Variables dont need to be defined although users might want to force usage of the ID datatype. All data starts out as a float in BLAST and either grows into vectors or gets converted/defined as an ID. For blast its assumed that float is the prefered datatype.
