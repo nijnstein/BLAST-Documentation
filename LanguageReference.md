@@ -2,36 +2,29 @@
 
 ### Statement Keywords
 
-[case](ref/switch.md)
-
-[default](ref/switch.md)
-
-[else](ref/ifthenelse.md)
-
-[if](ref/ifthenelse.md)
-
-[input](ref/inputs.md)
-
-[for](ref/for.md)
-
-[output](ref/outputs.md)
-
-[return](ref/return.md)
-
-[switch](ref/switch.md)
-
-[then](ref/ifthenelse.md)
-
-[while](ref/while.md)
-
-[yield](ref/yield.md)
+|keyword|description|
+|-------|-----------|
+|[case](ref/switch.md)|switch case compound|
+|[default](ref/switch.md)|default switch case compound|
+|[else](ref/ifthenelse.md)|else compound of if then else statement sequence|
+|[if](ref/ifthenelse.md)|if statement
+|[input](ref/inputs.md)|defines an input to the script|
+|[for](ref/for.md)|for loop|
+|[output](ref/outputs.md)|defines an output of the script|
+|[return](ref/return.md)|return; terminate execution|
+|[switch](ref/switch.md)|switch statement|
+|[then](ref/ifthenelse.md)|then compound of if then else statement sequence|
+|[while](ref/while.md)|while loop|
+|[yield](ref/yield.md)|yield execution|
 
 
 ### Literal Keywords 
 
-[false](ref/booleans.md)
+|Keyword|Value|
+|-------|-----|
+|[false](ref/booleans.md)|0.0|
+|[true](ref/booleans.md)|default: 1.0, anything other then 0.0 matches to true|
 
-[true](ref/booleans.md)
 
 ### Operators 
 
