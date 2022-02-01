@@ -1,14 +1,12 @@
 # BLAST Language Reference 
 
-### KEYWORDS
+### Statement Keywords
 
 [case](ref/switch.md)
 
 [default](ref/switch.md)
 
 [else](ref/ifthenelse.md)
-
-[false](ref/booleans.md
 
 [if](ref/ifthenelse.md)
 
@@ -24,8 +22,27 @@
 
 [then](ref/ifthenelse.md)
 
-[true](ref/booleans.md)
-
 [while](ref/while.md)
 
 [yield](ref/yield.md)
+
+
+### Literal Keywords 
+
+[false](ref/booleans.md)
+
+[true](ref/booleans.md)
+
+### Operators 
+
+| + | - | * | / |
+| & | `\|` | ^ | ! |
+
+### Expression
+
+An expression is a set of literals and identifiers combined with operators. Parenthesis can be used to influence the order of operation. 
+
+
+
+
+
