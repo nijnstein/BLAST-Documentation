@@ -65,14 +65,21 @@ a = (1 2 3 4) * (5 6 7, -8);
 
 ### Built in functions 
 
-```  
+  
 
-        fma, 
+|function|description|parameters|examples|
+|--------|-----------|----------|--------|
+|abs|get absolute value of operand| 1 numeric vector| | 
+|adda|add all operands in sequence| n numerics of equal vectorsize, used by optimizer | |
+|all|returns true if all arguments are true| n value of n vectorsizes, used by optimizer | |
+|any|returns true if any argument is true|n values of n vectorsizes, used by optimizer | | 
+
+``` 
+fma, 
 
         /// <summary>
         /// add all operands in sequence
         /// </summary>
-        adda,
 
         /// <summary>
         /// multiply all operands in sequence
@@ -89,20 +96,7 @@ a = (1 2 3 4) * (5 6 7, -8);
         /// </summary>
         suba,
 
-        /// <summary>
-        /// returns true if all arguments are true
-        /// </summary>
-        all,
 
-        /// <summary>
-        /// returns true if any argument is true 
-        /// </summary>
-        any,
-
-        /// <summary>
-        /// return absolute value of operand
-        /// </summary>
-        abs,
 
         /// <summary>
         /// select instruction 
