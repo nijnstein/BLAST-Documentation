@@ -1,23 +1,31 @@
 # BLAST Language Reference 
 
-###Lexical Conventions
-tokens, comments, operators, keywords, punctuators, literals.operator precedence/associativity.
+### KEYWORDS
 
-###Basic Concepts
-Scope, linkage, program startup and termination, storage classes, and types.
+[case](ref/switch.md)
 
-###Built-in types The fundamental types that are built into the C++ compiler and their value ranges.
+[default](ref/switch.md)
 
-###Standard Conversions
-Type conversions between built-in types. Also, arithmetic conversions and conversions among pointer, reference, and pointer-to-member types.
+[else](ref/ifthenelse.md)
 
-##Declarations and definitions Declaring and defining variables, types and functions.
+[false](ref/booleans.md
 
-###Operators, Precedence and Associativity
-The operators
+[if](ref/ifthenelse.md)
 
-###Expressions
-Types of expressions, semantics of expressions, reference topics on operators, casting and casting operators, run-time type information.
+[input](ref/inputs.md)
 
-###Statements
-Expression, null, compound, selection, iteration, jump, and declaration statements.
+[for](ref/for.md)
+
+[output](ref/outputs.md)
+
+[return](ref/return.md)
+
+[switch](ref/switch.md)
+
+[then](ref/ifthenelse.md)
+
+[true](ref/booleans.md)
+
+[while](ref/while.md)
+
+[yield](ref/yield.md)
