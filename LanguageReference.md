@@ -192,3 +192,16 @@ a = (1 2 3 4) * (5 6 7, -8);
 ``` 
 
 
+### External Function Calls 
+
+Blast uses function pointers to connect to other parts of its environment, these will be supplied with the following data by the BLAST engine:
+
+|data|source|description|
+|---|---|
+|engine|blast|pointer to engine data, contains constants, functionpointers and randomizer root.|
+|environment|user|optional pointer to native data containing data to be used by all scripts|
+|caller|user|optional pointer to native data containing all data supplied by the callsite|
+|parameters|blast|blast will call the external function using the parameters supplied to it by script|
+
+
+
