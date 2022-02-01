@@ -204,4 +204,9 @@ Blast uses function pointers to connect to other parts of its environment, these
 |parameters|blast|blast will call the external function using the parameters supplied to it by script|
 
 
+### Data Synchronization
+
+Blast uses the input and output keywords to define input or output variables. These will be prepared in the compiled package for fast IO syncs, the sync method however depends heavily on the packaging mode and its usage. Samples for each mode (Normal, SSMD, Entity) will be provided shortly;
+
+
 
