@@ -65,14 +65,15 @@ a = (1 2 3 4) * (5 6 7, -8);
 
 ### Built in functions 
 
+* note: the optimizer will replace sequences with its equivevalent function whenever possible providing shorter code and faster execution due to reduced control flow. 
   
 
-|function|description|parameters|examples|
-|--------|-----------|----------|--------|
-|abs|get absolute value of operand| 1 numeric vector| | 
-|adda|add all operands in sequence| n numerics of equal vectorsize, used by optimizer | |
-|all|returns true if all arguments are true| n value of n vectorsizes, used by optimizer | |
-|any|returns true if any argument is true|n values of n vectorsizes, used by optimizer | | 
+|function|description|parameters|returns|examples|
+|--------|-----------|----------|-------|--------|
+|abs|get absolute value of operand| 1 numeric vector | vector  | |
+|adda|add all operands in sequence| n numerics of equal vectorsize | vector | |
+|all|returns true if all arguments are true| n value of n vectorsizes | scalar | |
+|any|returns true if any argument is true|n values of n vectorsizes | scalar | | 
 
 ``` 
 fma, 
