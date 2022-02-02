@@ -135,13 +135,15 @@ Blast allows the user to define inline functions, a function consists of the fun
 ```
 function f1(a, b) 
 (
-  return a + b; 
+   c = a + b;  
+   return (a + b) / c; 
 );
 ```
-Blast functions will however work differently then in for example C#. There is NO scope. Although its possible to use the stack, blast will inline the function as is; working more like a macro. It will operate directly on the used variables and it will not make any data copies, making all parameters passed by reference.  
+Blast functions will however work differently then in for example C#. There is NO scope. Although its possible to use the stack, blast pushes only its current code-pointer to the stack, jumps to the function and then returns back to the location popped from stack. It operates directly on the used variables and it does not make any data copies, making all parameters passed by reference. Returning data will also work directly on the same data elements. Assigning `c` within a function assigns `c` in global scope.
 
-It could be possible to grow the stack and allow recursion with each recursion having its own scope but that is not in line with the direction we think this project should take. This should be viewed as a utility function, for recurring needs please consider implementing user defined external function calls that can be called natively. 
+Functions may call other inline functions.
 
+This should be viewed as a utility function, for recurring needs please consider implementing user defined external function calls that can be called natively. 
 
 ### External Function Calls 
 
@@ -159,5 +161,11 @@ Blast uses function pointers to connect to other parts of its environment, these
 
 Blast uses the input and output keywords to define input or output variables. These will be prepared in the compiled package for fast IO syncs, the sync method however depends heavily on the packaging mode and its usage. Samples for each mode (Normal, SSMD, Entity) will be provided shortly;
 
+
+### Data Validation
+
+During development we have the need to test a lot and there is some support for automatic testing in the form of validation script defines: `#validate a 1` These allow the script to set values that blast can match to the output of the script given default input.
+
+Blast can (depending on compilersettings) then validate the script during compilation in the same run it uses to determine the stackspace it needs to reserve in the compiled package.  
 
 
