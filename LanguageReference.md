@@ -1,5 +1,8 @@
 # BLAST Language Reference 
 
+[Functions]     
+[DataSync]  
+
 ### Statement Keywords
 
 |keyword|description|
@@ -65,7 +68,7 @@ a = (1 2 3 4) * (5 6 7, -8);
 ```
 
 ### Built in functions 
-
+   [Functions]: /url "Script API Functions"
 * note: the optimizer will replace sequences with its equivevalent function whenever possible providing shorter code and faster execution due to reduced control flow. 
   
 
@@ -158,12 +161,11 @@ Blast uses function pointers to connect to other parts of its environment, these
 
 
 ### Data Synchronization
-
+   [DataSync]: /url "Data Synchronization"
 Blast uses the input and output keywords to define input or output variables. These will be prepared in the compiled package for fast IO syncs, the sync method however depends heavily on the packaging mode and its usage. Samples for each mode (Normal, SSMD, Entity) will be provided shortly;
 
 
 ### Data Validation
-
 During development we have the need to test a lot and there is some support for automatic testing in the form of validation script defines: `#validate a 1` These allow the script to set values that blast can match to the output of the script given default input.
 
 Blast can (depending on compilersettings) then validate the script during compilation in the same run it uses to determine the stackspace it needs to reserve in the compiled package. It proved extremely usefull during development and it possibly can catch bugs early in deployment.
