@@ -166,6 +166,31 @@ Blast uses the input and output keywords to define input or output variables. Th
 
 During development we have the need to test a lot and there is some support for automatic testing in the form of validation script defines: `#validate a 1` These allow the script to set values that blast can match to the output of the script given default input.
 
-Blast can (depending on compilersettings) then validate the script during compilation in the same run it uses to determine the stackspace it needs to reserve in the compiled package.  
+Blast can (depending on compilersettings) then validate the script during compilation in the same run it uses to determine the stackspace it needs to reserve in the compiled package. It proved extremely usefull during development and it possibly can catch bugs early in deployment.
+
+**Example script with validation defines:**
+```
+#define result_1 11111
+#define result_2 22222
+
+a = 10; 
+b = 2; 
+
+switch(a > b)
+(
+  case 1:
+  (
+    e = result_1; 
+  )
+  default:
+  (
+    e = result_2;
+  )
+);
+ 
+#validate e 11111                 
+```
+
+
 
 
