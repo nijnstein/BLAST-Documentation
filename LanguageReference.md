@@ -1,8 +1,4 @@
 # BLAST Language Reference 
-
-Script API functions: [Functions]     
-Data Sunchronization: [DataSync]  
-
 ### Statement Keywords
 
 |keyword|description|
