@@ -16,6 +16,7 @@
 |[then](ref/ifthenelse.md)|then compound of if then else statement sequence|
 |[while](ref/while.md)|while loop|
 |[yield](ref/yield.md)|yield execution|
+|[function](ref/function.md|inline functions|
 
 
 ### Literal Keywords 
@@ -74,117 +75,71 @@ a = (1 2 3 4) * (5 6 7, -8);
 |adda|add all operands in sequence| n numerics of equal vectorsize | vector | |
 |all|returns true if all arguments are true| n value of n vectorsizes | scalar | |
 |any|returns true if any argument is true|n values of n vectorsizes | scalar | | 
-
+|atan|unity.mathematics.atan|any vectorsize|vector| |
+|atan2|unity.mathematics.atan2|any vectorsize|vector| |
+|ceil||||
+|clamp||||
+|ceillog2||||
+|ceilpow2||||
+|cos|unity.mathematics.cos|any vectorsize|vector ||
+|cosh|unity.mathematics.cos|any vectorsize|vector ||
+|cross|unity.mathematics.cross|vector 3|vector 3||
+|csum|unity.mathematics.csum|any vectorsize|scalar| |
+|call|explicetly call a function||[call](call-external.md)|
+|debug||||
+|debugstack||||
+|degrees||||
+|diva|divide all operands by eachother in sequence|any vectorsize|vector||
+|dot||||
+|exp||||
+|exp10||||
+|floor||||
+|floorlog2||||
+|fma||||
+|fmod||||
+|frac||||
+|lerp||||
+|log10||||
+|log2||||
+|logn||||
+|max|||||
+|maxa|get max value from operands|any vectorsize|vector||
+|min||||
+|mina||||
+|mula|multiply all operands in sequence|any vectorsize|vector||
+|nlerp||||
+|normalize||||
+|pow||||
+|radians||||
+|random|generate a random number|||
+|remap||||
+|rsqrt||||
+|saturate||||
+|seed|seed the random number generator|||
+|select||||
+|sin||||
+|sinh||||
+|slerp||||
+|sqrt||||
+|suba|substract all operands from eachother in sequence|any vectorsize|vector||
+|tan||||
+|trunc||||
+|unlerp||||
 ``` 
-fma, 
 
-        /// <summary>
-        /// add all operands in sequence
-        /// </summary>
+### Inline Functions
 
-        /// <summary>
-        /// multiply all operands in sequence
-        /// </summary>
-        mula,
+Blast allows the user to define inline functions, a function consists of the function keyword, a parameterlist (that even if empty may not be ommited) and a body: 
 
-        /// <summary>
-        /// divide all operands by eachother in sequence 
-        /// </summary>
-        diva,
+```
+function f1(a, b) 
+(
+  return a + b; 
+);
+```
+Blast functions will however work differently then in for example C#. There is NO scope. Although its possible to use the stack, blast will inline the function as is; working more like a macro. It will operate directly on the used variables and it will not make any data copies, making all parameters passed by reference.  
 
-        /// <summary>
-        /// substract all operands from eachother in sequence
-        /// </summary>
-        suba,
-
-
-
-        /// <summary>
-        /// select instruction 
-        /// </summary>
-        select,
-
-        /// <summary>
-        /// generate a random number 
-        /// </summary>
-        random,
-
-        /// <summary>
-        /// seed the random number generator 
-        /// </summary>
-        seed,
-
-        /// <summary>
-        /// get max value from operands, returns vector of same size as inputs 
-        /// </summary>
-        max,
-
-        /// <summary>
-        /// get min value from operands, returns vector of same size as inputs 
-        /// </summary>
-        min,
-
-/// = cmax
-        maxa,
-
-// = cmin
-        mina,
-
-        fmod,
-
-        csum,
-
-        trunc,
-
-
-        exp,
-        exp10,
-        log10,
-        logn,
-        log2,
-        cross,
-        dot,
-        sqrt,
-        rsqrt,
-        pow,
-
-
-        sin,
-        cos,
-        tan,
-        atan,
-        atan2,
-        cosh,
-        sinh,
-
-        degrees,
-        radians,
-
-        lerp,
-        slerp,
-        nlerp,
-        saturate,        
-        clamp,
-        normalize,
-        ceil,
-        floor,
-        frac,
-
-        remap,
-        unlerp,
-
-        ceillog2,
-
-        floorlog2,
-
-        ceilpow2,
-
-
-  debugstack
-  debug
-
-  [call](call-external.md)
-``` 
+It could be possible to grow the stack and allow recursion with each recursion having its own scope but that is not in line with the direction we think this project should take. This should be viewed as a utility function, for recurring needs please consider implementing user defined external function calls that can be called natively. 
 
 
 ### External Function Calls 
