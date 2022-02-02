@@ -16,7 +16,7 @@
 |[then](ref/ifthenelse.md)|then compound of if then else statement sequence|
 |[while](ref/while.md)|while loop|
 |[yield](ref/yield.md)|yield execution|
-|[function](ref/function.md|inline functions|
+|[function](ref/function.md)|inline functions|
 
 
 ### Literal Keywords 
