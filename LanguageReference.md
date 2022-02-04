@@ -139,7 +139,7 @@ function f1(a, b)
 );
 ```
 
-Blast functions will however work differently then in for example C#. There is NO scope. Although its possible to use the stack, blast pushes only its current code-pointer to the stack, jumps to the function and then returns back to the location popped from stack. It operates directly on the used variables and it does not make any data copies, making all parameters passed by reference. Returning data will also work directly on the same data elements. Assigning `c` within a function assigns `c` in global scope.
+Blast functions will however work differently then in for example C#. There is NO scope as the function is inlined at the callsite. It operates directly on the used variables and it does not make any data copies, making all parameters passed by reference. Returning data will also work directly on the same data elements. Assigning `c` within a function assigns `c` in global scope.
 
 Inlined Functions may call other inline functions.
 
