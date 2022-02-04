@@ -251,9 +251,71 @@ Dont allocate package memory for stacks, instead uses interpretor's stack.
 
 #### Built in
 
+Built in functions are directly encoded in opcodes and are made available to blast in the form of a BlastScriptAPI class. Several math functions have been built in and many other functions will follow. 
+
+See (Language Reference)[LanguageReference.md] for an overview of all built in functions. 
+
+```
+   f = rsqrt(1.1); 
+   g = sqrt(2); 
+   h = max(f, g);
+``` 
+
 #### External
 
-##### Delegates 
+Blast can call external functions that have been burst compiled and registered in the blast api used during compilation and execution.
+
+An external function example in c#: (parameters will change to some handy structs) 
+```csharp
+    [BurstCompile]
+    unsafe public static float GetTeamId(IntPtr ptr_engine, IntPtr ptr_data, IntPtr ptr_caller, float actor_index)
+    {
+        SimulationHandlerData* data = (SimulationHandlerData*)ptr_data.ToPointer();
+        SimulationCommand* caller = (SimulationCommand*)ptr_caller.ToPointer();
+
+        if (actor_index < 0)
+        {
+            return data->ActorStore.Team(caller->actor_index).TeamIndex;
+        }
+        else
+        {
+            return data->ActorStore.Team((int)actor_index).TeamIndex;
+        }
+    }
+```
+
+The current registration, which will be simplified further shortly:
+
+```csharp 
+   API.RegisterExternal("GetTeamId", ReturnType.ID, new Blast.BlastDelegate_f1(SimulationBlastHandlerFunctions.GetTeamId), "actor_index");
+```
+
+#### Inline Functions | Macros
+
+Blast also allows the use of inlined functions, albeit with restriction imposed due to blasts memory requirements: 
+
+```
+function a(a, b, c)
+(
+	return a + b + c;	   
+)
+
+p0 = 1; 
+p1 = 2;
+p2 = 3; 
+
+p = a(p1, p2, p3); 
+```
+
+The function call is inlined into the callsite, this means there are several limitation or advantages depending on how its used:
+
+- Inlined functions share global scope, only function parameters are scoped to the function defining them.
+- Inlined functions may not declare new variables, if you need extra variables, declare them as input, output or in as normal variable in the main body.
+- Vector size and datatype is propagated, ie, an inlined function is generic, unless the function uses variables from the globalscope that might force vectorsizes onto operations.
+- Inlined functions dont use additional stackmemory due to these restrictions and the fact they are inlined (no jumps, no register pushes to stack)
+
+Inline functions could should be viewed as shortcut-macros in algorithms, larger reusable code blocks should be added as external function calls for maximum performance as nativecode will always be faster then interpreted bytecode. 
+
 
 #### Parameters 
 Parameters are identifiers or sequences of operations seperated by a `,` and may be:
