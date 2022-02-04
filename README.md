@@ -325,6 +325,24 @@ Parameters are identifiers or sequences of operations seperated by a `,` and may
 - other functions
 - vectors
 
+##### Indexers
+All things resulting in a value can be indexed:
+
+```csharp
+	a = 1;     	# declares storage
+	b = (4 5 6 7); 
+	a = b.x; 
+	b.x = 7; 
+	
+	debug(a);  	# logs 4 
+	debug(b);  	# logs 7 5 6 7
+```  
+
+Currently the maxiumum vectorsize in datatypes is 4, so the only allowed indexers are:
+
+`.x|y|z|w and .r|g|b|a`
+
+
 #### Functioncall Examples 
 
 ```
