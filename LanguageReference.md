@@ -38,6 +38,68 @@ Assingment: `=`
 
 Comparisons: ` = < <= > >= != `
 
+### Constant data 
+
+Blast uses bytecode operations to index a datasegment for variable and stack data. Any constant value that is not internally mapped to a bytecode will be packaged in the datasegment. Blast map's several often used values like 0, 1, 2, pi and others to byte sized opcodes, this can save a lot of room in the datasegment depending on how well the scripts match to the constant data. For maximum efficiency users should overwrite blasts default constant table with their own.
+
+_If for example_ blast is used to control a statemachine its state-ids could be stored in constants potentially saving many bytes in the compiled package and datasegment.
+
+#### Defaultly mapped constants:
+
+```csharp
+                case blast_operation.pi: return math.PI;
+                case blast_operation.inv_pi: return 1 / math.PI;
+                case blast_operation.epsilon: return math.EPSILON;
+                case blast_operation.infinity: return math.INFINITY;
+                case blast_operation.negative_infinity: return -math.INFINITY;
+                case blast_operation.nan: return math.NAN;
+                case blast_operation.min_value: return math.FLT_MIN_NORMAL;
+                case blast_operation.value_0: return 0f;
+                case blast_operation.value_1: return 1f;
+                case blast_operation.value_2: return 2f;
+                case blast_operation.value_3: return 3f;
+                case blast_operation.value_4: return 4f;
+                case blast_operation.value_8: return 8f;
+                case blast_operation.value_10: return 10f;
+                case blast_operation.value_16: return 16f;
+                case blast_operation.value_24: return 24f;
+                case blast_operation.value_32: return 32f;
+                case blast_operation.value_64: return 64f;
+                case blast_operation.value_100: return 100f;
+                case blast_operation.value_128: return 128f;
+                case blast_operation.value_256: return 256f;
+                case blast_operation.value_512: return 512f;
+                case blast_operation.value_1000: return 1000f;
+                case blast_operation.value_1024: return 1024f;
+                case blast_operation.value_30: return 30f;
+                case blast_operation.value_45: return 45f;
+                case blast_operation.value_90: return 90f;
+                case blast_operation.value_180: return 180f;
+                case blast_operation.value_270: return 270f;
+                case blast_operation.value_360: return 360f;
+                case blast_operation.inv_value_2: return 1f / 2f;
+                case blast_operation.inv_value_3: return 1f / 3f;
+                case blast_operation.inv_value_4: return 1f / 4f;
+                case blast_operation.inv_value_8: return 1f / 8f;
+                case blast_operation.inv_value_10: return 1f / 10f;
+                case blast_operation.inv_value_16: return 1f / 16f;
+                case blast_operation.inv_value_24: return 1f / 24f;
+                case blast_operation.inv_value_32: return 1f / 32f;
+                case blast_operation.inv_value_64: return 1f / 64f;
+                case blast_operation.inv_value_100: return 1f / 100f;
+                case blast_operation.inv_value_128: return 1f / 128f;
+                case blast_operation.inv_value_256: return 1f / 256f;
+                case blast_operation.inv_value_512: return 1f / 512f;
+                case blast_operation.inv_value_1000: return 1f / 1000f;
+                case blast_operation.inv_value_1024: return 1f / 1024f;
+                case blast_operation.inv_value_30: return 1f / 30f;
+                case blast_operation.inv_value_45: return 1f / 45f;
+                case blast_operation.inv_value_90: return 1f / 90f;
+                case blast_operation.inv_value_180: return 1f / 180f;
+                case blast_operation.inv_value_270: return 1f / 270f;
+                case blast_operation.inv_value_360: return 1f / 360f;
+```
+
 ### Assignments | Expressions
 
 An expression is a set of literals and identifiers combined with operators. Parenthesis can be used to influence the order of operation. 
