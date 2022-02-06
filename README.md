@@ -66,7 +66,7 @@ Everything between  `(` and `)` is called a compound, a compound may have severa
 
 There is limited datatype support: 
 
-```Unknown: determined at runtime 
+```csharp Unknown: determined at runtime 
 
 Numeric: 1.0 etc
 
@@ -89,7 +89,7 @@ BLAST connects to its enviroment in several ways
 
 BLAST will not directly support arrays or pointers as datatypes. Instead it expects users to create an api to their simulation to query by the script. Its straightforward to devise functions in unity and connect them to blast and to end up like so: 
 
-```
+```csharp
  while(i < get_actor_count())
  (
      m1 = get_actor_data(i); 
@@ -173,7 +173,7 @@ The # is used to define constants, input and output(s) and validations. Any sequ
 - A comment can be started at any point in the line
 
 ##### Compiler Define Examples
-``` 
+```csharp
 #define   variable  1234
 #input    variable  0 4
 #output   variable  4 8 
@@ -182,7 +182,7 @@ The # is used to define constants, input and output(s) and validations. Any sequ
 
 All other text that starts with # is a comment and may start at any point of a line, also after `#[definition]`:
 
-``` 
+```csharp
 #input    variable  [offset] [bytesize]    # comment 123
 ``` 
 
@@ -255,7 +255,7 @@ Built in functions are directly encoded in opcodes and are made available to bla
 
 See (Language Reference)[LanguageReference.md] for an overview of all built in functions. 
 
-```
+```csharp
    f = rsqrt(1.1); 
    g = sqrt(2); 
    h = max(f, g);
@@ -294,7 +294,7 @@ The current registration, which will be simplified further shortly:
 
 Blast also allows the use of inlined functions, albeit with restriction imposed due to blasts memory requirements: 
 
-```
+```csharp
 function a(a, b, c)
 (
 	return a + b + c;	   
