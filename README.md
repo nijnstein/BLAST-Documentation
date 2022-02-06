@@ -310,9 +310,9 @@ p = a(p1, p2, p3);
 The function call is inlined into the callsite, this means there are several limitation or advantages depending on how its used:
 
 - Inlined functions share global scope, only function parameters are scoped to the function defining them.
-- Inlined functions may not declare new variables, if you need extra variables, declare them as input, output or in as normal variable in the main body.
-- Vector size and datatype is propagated, ie, an inlined function is generic, unless the function uses variables from the globalscope that might force vectorsizes onto operations.
-- Inlined functions dont use additional stackmemory due to these restrictions and the fact they are inlined (no jumps, no register pushes to stack)
+- Inlined functions may not declare new variables, if you need extra variables, declare them as input, output or as normal variable in the main body.
+- Vector size and datatype is propagated, ie, an inlined function is generic, unless the function uses variables from the globalscope that might force vectorsizes onto operations. 
+- Inlined functions dont use additional stackmemory due to these restrictions and the fact they are inlined (no jumps, no register pushes to stack, no declarations)
 
 Inline functions could should be viewed as shortcut-macros in algorithms, larger reusable code blocks should be added as external function calls for maximum performance as nativecode will always be faster then interpreted bytecode. 
 
@@ -347,7 +347,7 @@ This will change in future versions.
 
 #### Functioncall Examples 
 
-```
+```csharp
  a = max (1, 2);
  a = max ((1 1), (2 2));
  a = max (a, 1, max(a, 2));
@@ -357,7 +357,7 @@ This will change in future versions.
 ### Example Scripts
 
 Validation script as used in some tests: 
-```
+```csharp
 #define result_1 11111
 #define result_2 22222
 
@@ -404,7 +404,7 @@ for(i = 5; i < 15; i = i + 1)
 
 
 Implementation of a state in a statemachine
-```
+```csharp
 #
 # HOVERTANK STATEMACHINE
 #
@@ -481,7 +481,7 @@ if(explore_cell < 0) then
 
 
 Various operations for testing:
-```
+```csharp
 
 a = 1 * -2;						
 b = -1 * 2;						
@@ -519,7 +519,7 @@ ag = 1 * 10 * 3 * (3 + 4 * 2);
 ```
 
 Vector example with some script debuging features and insights into BLAST's stack usage, it uses less data and code bytes while keeping execution flat for the interpretation allowing it to use less memory on the target cpu:
-```
+```csharp
 
  a = maxa((1 2 3), (4 5 6), (7 8 9));
   
@@ -584,7 +584,7 @@ Vector example with some script debuging features and insights into BLAST's stac
 
 
 Example output for nested functions, the results are pushed and popped when needed. This ensures no recursion or stacking of register data during interpretation. The script code `debug(max((1 + 2), 2)); ` or `debug(max(1 + 2, 2));` results int the following output:
-```
+```csharp
     
 
    root of 3 
@@ -616,7 +616,8 @@ Blast.Debug - codepointer: 12, id: 25, NUMERIC: 3,00, vectorsize: 1
 Example output for nested vector operations with negative constants encoded in bytecode, although the output is flattened into 6 statements which seems more work its actually faster to execute because by pushing stuff on the stack the datatype becomes fixed for the interpretor and it wont need to grow vectors value by value, also not processing nested compounds but instead executing them in a linear fashion ensures less function stack use for the code running the interpretation (more constant memory). 
 
 **Note that for this test the optimizer is disabled as it removes unneeded compounds resulting in less statements to execute but a less usefull test for flattening. **
-```
+
+```csharp
    [InlineData("a = ((2 2 2 2) * (2, -2 2 2)) * (4 4 4 4);", 16)]
 
    root of 6 
@@ -675,7 +676,7 @@ Input code segment: `a = 1 / 2.1 / 3.2 / 4.3;`
 
 Resulting nodes and bytecode: 
 
-``` 
+```csharp 
    root of 1 
       assignment of a 
          function mula 
