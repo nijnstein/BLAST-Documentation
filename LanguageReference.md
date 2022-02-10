@@ -274,6 +274,7 @@ public struct data : IComponentData
   public float3 ValueA;
   public float ValueB;   
 }
+```
 
 The script can then very efficiently use this as a datasegment.
 
