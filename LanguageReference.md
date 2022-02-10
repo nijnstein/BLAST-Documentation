@@ -38,6 +38,8 @@ Assingment: `=`
 
 Comparisons: ` = < <= > >= != `
 
+Indexing: .[x|y|z|w|r|g|b|a]
+
 ### Constant data 
 
 Blast uses bytecode operations to index a datasegment for variable and stack data. Any constant value that is not internally mapped to a bytecode will be packaged in the datasegment. Blast map's several often used values like 0, 1, 2, pi and others to byte sized opcodes, this can save a lot of room in the datasegment depending on how well the scripts match to the constant data. For maximum efficiency users should overwrite blasts default constant table with their own.
@@ -124,6 +126,8 @@ Inline vector definition: `(1.2 2.1, -3.3)`
 ```
 a = (1 2 3 4) * (5 6 7, -8); 
 ```
+
+To get the component of a vector it can be indexed: `a.x` 
 
 ### Built in functions 
    [Functions]: /url "Script API Functions"
@@ -225,6 +229,64 @@ Blast uses function pointers to connect to other parts of its environment, these
 ### Data Synchronization
    [DataSync]: /url "Data Synchronization"
 Blast uses the input and output keywords to define input or output variables. These will be prepared in the compiled package for fast IO syncs, the sync method however depends heavily on the packaging mode and its usage. Samples for each mode (Normal, SSMD, Entity) will be provided shortly;
+
+#### Basic Use 
+
+Use methods provided by the BlastScript class to read or write to script variables exposed via input and/or output, it is not necessary to use input nor output defines but doing so forces their memoryorder regardless the code written and should be considered good practice, the can be omitted but you will have to directly write to the datasegments to set variables by name.
+
+BlastScript:
+```csharp
+#input a float3 3 3 3
+#input b float 3
+
+a = b * a; 
+``` 
+
+Unity:
+```csharp
+
+// create script, set a 
+BlastScript script = BlastScript.FromResource("/bs"); 
+script.Set("a", new Vector3(4, 4, 4));
+script.Set("b", 8);
+script.Execute(); 
+
+Vector3 result = (Vector3)script["a"];
+
+``` 
+
+#### Entity/IComponentData
+
+The script's datasegment is directly mapped against an IComponentData record: 
+
+For a script defined as: 
+```csharp
+#input a float3 3 3 3
+#input b float 3
+
+a = b * a; 
+``` 
+
+The IComponentData should be like:
+```csharp
+public struct data : IComponentData 
+{
+  public float3 ValueA;
+  public float ValueB;   
+}
+
+The script can then very efficiently use this as a datasegment.
+
+##### Yield and Entities 
+
+If yield is used, all memory used for script execution must map to the IComponentData struct. This includes any stackmemory that is used: yield reserves 20 bytes in each segment to allow it to store its internal execution state.  
+
+#### SSMD 
+
+The scripts datasegment is packed as with entities but not matched to any structure, it might also not be complete depending on any constant data in it. In SSMD mode there is no stack allocated in the datasegment and in the future it will inline any constant data in the code datastream to maximize memory efficiency when running many billions of scripts each second.
+
+##### Yield
+Yield is not supported. 
 
 
 ### Data Validation
