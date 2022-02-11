@@ -3,7 +3,7 @@
 
 return true if op is a value: - pop counts!! - byte value between lowest constant and extended op id (dont allow constants in extended op id's)
 
-**Namespace:**&nbsp;<a href="bc1962ef-fc17-4dde-e64c-a350d8f217aa">NSS.Blast.Interpretor</a><br />**Assembly:**&nbsp;BLAST (in BLAST.dll) Version: 1.0.0
+**Namespace:**&nbsp;<a href="bc1962ef-fc17-4dde-e64c-a350d8f217aa.md">NSS.Blast.Interpretor</a><br />**Assembly:**&nbsp;BLAST (in BLAST.dll) Version: 1.0.0
 
 ## Syntax
 
@@ -47,4 +47,4 @@ Type: <a href="https://docs.microsoft.com/dotnet/api/system.boolean" target="_bl
 
 
 #### Reference
-<a href="4de5bd5a-f1bd-8188-7356-ab8a45b847d4">BlastInterpretor Structure</a><br /><a href="bc1962ef-fc17-4dde-e64c-a350d8f217aa">NSS.Blast.Interpretor Namespace</a><br />
+<a href="4de5bd5a-f1bd-8188-7356-ab8a45b847d4.md">BlastInterpretor Structure</a><br /><a href="bc1962ef-fc17-4dde-e64c-a350d8f217aa.md">NSS.Blast.Interpretor Namespace</a><br />

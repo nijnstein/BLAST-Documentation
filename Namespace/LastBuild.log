@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shfbBuild product="Sandcastle Help File Builder and Tools" version="2022.1.22.0" projectFile="F:\Repo\Nijnstein\Blast Namespace Documentation\Blast Namespace Documentation.shfbproj" started="11-2-2022 02:22:54">
+<shfbBuild product="Sandcastle Help File Builder and Tools" version="2022.1.22.0" projectFile="F:\Repo\Nijnstein\Blast Namespace Documentation\Blast Namespace Documentation.shfbproj" started="11-2-2022 02:30:33">
 <buildStep step="Initializing">
 Finding tools...
 The Sandcastle tools are located in &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder&#39;
@@ -151,17 +151,17 @@ Copying XML comments files
 </buildStep>
 <buildStep step="GenerateSharedContent">
 Generating shared content files (en-US, English (United States))...
-    Last step completed in 00:00:00,0020
+    Last step completed in 00:00:00,0015
 </buildStep>
 <buildStep step="GenerateApiFilter">
 Generating API filter for MRefBuilder...
-    Last step completed in 00:00:00,0025
+    Last step completed in 00:00:00,0084
 </buildStep>
 <buildStep step="GenerateReflectionInfo">
 Generating reflection information...
-[C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe - GenerateRefInfo-de720dc9-75af-4082-972b-766b52f07e50.proj]
-Build started 11-2-2022 02:22:55.
-Project &quot;F:\Repo\Nijnstein\Blast Namespace Documentation\Help\Working\GenerateRefInfo-de720dc9-75af-4082-972b-766b52f07e50.proj&quot; on node 1 (default targets).
+[C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe - GenerateRefInfo-1bb00956-82aa-4489-bea9-408178f4f042.proj]
+Build started 11-2-2022 02:30:34.
+Project &quot;F:\Repo\Nijnstein\Blast Namespace Documentation\Help\Working\GenerateRefInfo-1bb00956-82aa-4489-bea9-408178f4f042.proj&quot; on node 1 (default targets).
 PrepareForBuild:
   Creating directory &quot;obj\Debug\&quot;.
 GenerateBindingRedirects:
@@ -174,29 +174,29 @@ GenerateRefInfo:
   Wrote information on 13 namespaces, 99 types, and 1109 members
   Merging duplicate type and member information
   Merged 0 duplicate type(s) and 0 duplicate member(s)
-Done Building Project &quot;F:\Repo\Nijnstein\Blast Namespace Documentation\Help\Working\GenerateRefInfo-de720dc9-75af-4082-972b-766b52f07e50.proj&quot; (default targets).
-    Last step completed in 00:00:00,6349
+Done Building Project &quot;F:\Repo\Nijnstein\Blast Namespace Documentation\Help\Working\GenerateRefInfo-1bb00956-82aa-4489-bea9-408178f4f042.proj&quot; (default targets).
+    Last step completed in 00:00:00,6379
 </buildStep>
 <buildStep step="ApplyDocumentModel">
 Applying document model to reflection output...
-    Last step completed in 00:00:00,0407
+    Last step completed in 00:00:00,0377
 </buildStep>
 <buildStep step="AddNamespaceGroups">
 Adding namespace group entries...
 Added 5 namespace group entries
-    Last step completed in 00:00:00,0258
+    Last step completed in 00:00:00,0308
 </buildStep>
 <buildStep step="AddApiTopicFilenames">
 Adding topic filenames to API members...
-    Last step completed in 00:00:00,0303
+    Last step completed in 00:00:00,0208
 </buildStep>
 <buildStep step="GenerateApiTopicManifest">
 Generating API topic manifest...
-    Last step completed in 00:00:00,0203
+    Last step completed in 00:00:00,0213
 </buildStep>
 <buildStep step="GenerateNamespaceSummaries">
 Generating namespace summary information...
-    Last step completed in 00:00:00,2792
+    Last step completed in 00:00:00,3591
 </buildStep>
 <buildStep step="CopyConceptualContent">
 Copying conceptual content...
@@ -204,6 +204,7 @@ Copying standard token shared content file...
 Checking for other token files...
 Checking for code snippets files...
 Copying images and creating the media map file...
+    F:\Repo\Nijnstein\Blast Namespace Documentation\icons\help.png -&gt; F:\Repo\Nijnstein\Blast Namespace Documentation\Help\Working\media\help.png
 Generating conceptual topic files
     Parsing topic file &#39;F:\Repo\Nijnstein\Blast Namespace Documentation\Content\Welcome.aml&#39;
     F:\Repo\Nijnstein\Blast Namespace Documentation\Content\Welcome.aml -&gt; F:\Repo\Nijnstein\Blast Namespace Documentation\Help\Working\ddueXml\b9ad19e2-d615-4cb3-b68b-64be6171b729.xml
@@ -211,33 +212,33 @@ Generating conceptual topic files
     F:\Repo\Nijnstein\Blast Namespace Documentation\Content\VersionHistory\VersionHistory.aml -&gt; F:\Repo\Nijnstein\Blast Namespace Documentation\Help\Working\ddueXml\d6b6d980-0c79-4e3d-b97b-a00ee7d7d9dd.xml
     Parsing topic file &#39;F:\Repo\Nijnstein\Blast Namespace Documentation\Content\VersionHistory\v1.0.0.0.aml&#39;
     F:\Repo\Nijnstein\Blast Namespace Documentation\Content\VersionHistory\v1.0.0.0.aml -&gt; F:\Repo\Nijnstein\Blast Namespace Documentation\Help\Working\ddueXml\6cd45df0-07c3-4a1f-a60a-95106e592665.xml
-    Last step completed in 00:00:00,0114
+    Last step completed in 00:00:00,0124
 </buildStep>
 <buildStep step="CreateConceptualTopicConfigs">
 Creating conceptual topic configuration files...
     Companion files
     _ContentMetadata_.xml
     Merging topic IDs into manifest.xml
-    Last step completed in 00:00:00,0035
+    Last step completed in 00:00:00,0040
 </buildStep>
 <buildStep step="CopyAdditionalContent">
 Copying additional content files...
-F:\Repo\Nijnstein\Blast Namespace Documentation\icons\Help.png -&gt; F:\Repo\Nijnstein\Blast Namespace Documentation\Help\Working\Output\Markdown\icons\Help.png
-    Last step completed in 00:00:00,0015
+No additional content to copy
+    Last step completed in 00:00:00,0000
 </buildStep>
 <buildStep step="MergeTablesOfContents">
 Merging conceptual and additional tables of contents...
-    Last step completed in 00:00:00,0005
+    Last step completed in 00:00:00,0000
 </buildStep>
 <buildStep step="GenerateIntermediateTableOfContents">
 Generating intermediate table of contents file for API content...
 Generating conceptual content intermediate TOC file...
-    Last step completed in 00:00:00,0332
+    Last step completed in 00:00:00,0327
 </buildStep>
 <buildStep step="CreateBuildAssemblerConfigs">
 Creating Sandcastle configuration files...
     sandcastle.config
-    Last step completed in 00:00:00,1796
+    Last step completed in 00:00:00,1771
 </buildStep>
 <buildStep step="MergeCustomConfigs">
 Merging custom build component configurations
@@ -250,7 +251,7 @@ F:\Repo\Nijnstein\Blast Namespace Documentation\Help\Working\sandcastle.config
 <buildStep step="BuildTopics">
 Building help topics...
 [C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe - BuildTopics.proj]
-Build started 11-2-2022 02:22:56.
+Build started 11-2-2022 02:30:35.
 Project &quot;F:\Repo\Nijnstein\Blast Namespace Documentation\Help\Working\BuildTopics.proj&quot; on node 1 (default targets).
 BuildTopics:
   Microsoft.Build (v16.5.0+d4cbfca49cea3b14c8b3cc0bbd6cb2a6d55ff3d9)
@@ -882,11 +883,11 @@ BuildAssembler : warning : ShowMissingComponent: [G:NSS] Missing &lt;summary&gt;
   CopyFromIndexComponent: &quot;reflection&quot; in-memory cache entries used: 5 of 15.
   CopyFromIndexComponent: &quot;comments&quot; in-memory cache entries used: 1 of 30.
 Done Building Project &quot;F:\Repo\Nijnstein\Blast Namespace Documentation\Help\Working\BuildTopics.proj&quot; (default targets).
-    Last step completed in 00:00:04,9347
+    Last step completed in 00:00:04,7571
 </buildStep>
 <buildStep step="CombiningIntermediateTocFiles">
 Combining conceptual and API intermediate TOC files...
-    Last step completed in 00:00:00,0089
+    Last step completed in 00:00:00,0079
 </buildStep>
 <buildStep step="CopyStandardHelpContent">
 Copying standard help content...
@@ -931,7 +932,7 @@ C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\Components\Markdo
 C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\Components\Markdown\media\static.gif -&gt; F:\Repo\Nijnstein\Blast Namespace Documentation\Help\Working\Output\Markdown\media\static.gif
 C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\Components\Markdown\media\xna.gif -&gt; F:\Repo\Nijnstein\Blast Namespace Documentation\Help\Working\Output\Markdown\media\xna.gif
 C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\Components\Markdown\MarkdownContent\_Footer.md -&gt; F:\Repo\Nijnstein\Blast Namespace Documentation\Help\Working\Output\Markdown\_Footer.md
-    Last step completed in 00:00:00,0848
+    Last step completed in 00:00:00,0828
 </buildStep>
 <buildStep step="GenerateHelpProject">
 Executing informational Generate Help Project build step for plug-ins (not used for Markdown)
@@ -946,16 +947,16 @@ Generating markdown content...
   Copying content to output folder...
   Copied 500 files
   Copied 1000 files
-  Finished copying 1057 files
-    Last step completed in 00:00:01,3635
+  Finished copying 1056 files
+    Last step completed in 00:00:01,4126
 </buildStep>
 <buildStep step="CleanIntermediates">
 Removing intermediate files...
-    Last step completed in 00:00:00,3462
+    Last step completed in 00:00:00,2148
 </buildStep>
 <buildStep step="Completed">
 
-Build completed successfully at 11-2-2022 02:23:03.  Total time: 00:00:08,7534
+Build completed successfully at 11-2-2022 02:30:42.  Total time: 00:00:08,5555
 
 </buildStep>
 </shfbBuild>

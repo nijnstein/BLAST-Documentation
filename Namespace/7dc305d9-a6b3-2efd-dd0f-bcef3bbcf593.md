@@ -3,7 +3,7 @@
 
 check if the node IS: [compound][-][param|pop_or_val][/compound]
 
-**Namespace:**&nbsp;<a href="26a25caa-f50b-92ad-f15c-dbb9db1493ae">NSS.Blast.Compiler</a><br />**Assembly:**&nbsp;BLAST (in BLAST.dll) Version: 1.0.0
+**Namespace:**&nbsp;<a href="26a25caa-f50b-92ad-f15c-dbb9db1493ae.md">NSS.Blast.Compiler</a><br />**Assembly:**&nbsp;BLAST (in BLAST.dll) Version: 1.0.0
 
 ## Syntax
 
@@ -38,7 +38,7 @@ static member IsCompoundWithSingleNegationOfValue :
 
 
 #### Parameters
-&nbsp;<dl><dt>node</dt><dd>Type: <a href="7dc9b7e9-64ad-f224-ae1a-4e6639739f56">NSS.Blast.Compiler.node</a><br />the node that should be the compound in the check</dd></dl>
+&nbsp;<dl><dt>node</dt><dd>Type: <a href="7dc9b7e9-64ad-f224-ae1a-4e6639739f56.md">NSS.Blast.Compiler.node</a><br />the node that should be the compound in the check</dd></dl>
 
 #### Return Value
 Type: <a href="https://docs.microsoft.com/dotnet/api/system.boolean" target="_blank" rel="noopener noreferrer">Boolean</a><br />\[Missing <returns> documentation for "M:NSS.Blast.Compiler.node.IsCompoundWithSingleNegationOfValue(NSS.Blast.Compiler.node)"\]
@@ -47,4 +47,4 @@ Type: <a href="https://docs.microsoft.com/dotnet/api/system.boolean" target="_bl
 
 
 #### Reference
-<a href="7dc9b7e9-64ad-f224-ae1a-4e6639739f56">node Class</a><br /><a href="eefd3257-8d65-9a18-5d97-bc738a82e45e">IsCompoundWithSingleNegationOfValue Overload</a><br /><a href="26a25caa-f50b-92ad-f15c-dbb9db1493ae">NSS.Blast.Compiler Namespace</a><br />
+<a href="7dc9b7e9-64ad-f224-ae1a-4e6639739f56.md">node Class</a><br /><a href="eefd3257-8d65-9a18-5d97-bc738a82e45e.md">IsCompoundWithSingleNegationOfValue Overload</a><br /><a href="26a25caa-f50b-92ad-f15c-dbb9db1493ae.md">NSS.Blast.Compiler Namespace</a><br />
