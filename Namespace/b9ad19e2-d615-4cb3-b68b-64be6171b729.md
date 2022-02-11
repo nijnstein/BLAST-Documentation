@@ -1,4 +1,4 @@
-# Welcome to the [TODO: Add project name]
+# Welcome to the BLAST namespace documentation
 
 This is a sample conceptual topic. You can use this as a starting point for adding more conceptual content to your help project.
 
