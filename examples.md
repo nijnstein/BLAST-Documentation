@@ -21,7 +21,7 @@ Single use:
 ``` 
 Repeated Use:
 
-'''csharp 
+```csharp
             // somewhere blast has to be initialized, all threads can use this same object
             // it provides functionpointers, constants and other information needed for execution
             Blast blast = Blast.Create(Allocator.Persistant); 
@@ -46,7 +46,7 @@ Repeated Use:
             // at the end of the program, cleanup blast 
             blast.Destroy(); 
 
-'''
+```
 
 SSMD | Single Script Multiple Data execution 
 
@@ -56,15 +56,16 @@ usage will simplify
     
             using(Blast blast = Blast.Create(Allocator.Persistent))
             {
-                BlastScriptPackage package = blast.Package(code, BlastCompilerOptions.SSMD.Trace());
+                BlastScript bs = BlastScript.FromText("result = 1 + value;"); 
+                BlastError res = bs.Package(BlastCompilerOptions.SSMD.Trace());
 
                 byte* data = stackalloc byte[package.Package.SSMDDataSize * n];
 
                 BlastSSMDDataStack* ssmd_data = (BlastSSMDDataStack*)(void*)data;
                 package.Package.CloneDataStack(n, ssmd_data);
 
-                // execute script wioth n * input data
-                blast.Execute(package.Package, IntPtr.Zero, new IntPtr(ssmd_data), n);
+                // execute script with n * input data
+                res = blast.Execute(package.Package, IntPtr.Zero, new IntPtr(ssmd_data), n);
             }
 
 ``` 
