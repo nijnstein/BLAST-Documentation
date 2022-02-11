@@ -24,7 +24,7 @@ Repeated Use:
 ```csharp
             // somewhere blast has to be initialized, all threads can use this same object
             // it provides functionpointers, constants and other information needed for execution
-            Blast blast = Blast.Create(Allocator.Persistant); 
+            Blast blast = Blast.Create(Allocator.Persistent); 
     
             // create a script package from text 
             BlastScript bs = BlastScript.FromText("result = 1 + value;");
