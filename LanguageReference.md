@@ -303,7 +303,7 @@ During development we have the need to test a lot and there is some support for 
 Blast can (depending on compilersettings) then validate the script during compilation in the same run it uses to determine the stackspace it needs to reserve in the compiled package. It proved extremely usefull during development and it possibly can catch bugs early in deployment.
 
 **Example script with validation defines:**
-```
+```csharp
 #define result_1 11111
 #define result_2 22222
 
