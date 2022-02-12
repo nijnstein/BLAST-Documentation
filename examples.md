@@ -9,7 +9,7 @@ Single use:
 
 ```csharp
             Blast.InitInstance();
-            BlastScript bs = BlastScript.FromText(script);
+            BlastScript bs = BlastScript.FromText("result = 1 + value;");
             bs["value"] = 2;
 
             BlastError res = bs.Execute();
