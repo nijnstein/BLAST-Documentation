@@ -8,44 +8,39 @@
 Single use: 
 
 ```csharp
-            using (Blast blast = Blast.Create())
-            {
-                BlastScript bs = BlastScript.FromText("result = 1 + value;");
-                bs["value"] = 2;
+            Blast.InitInstance();
+            BlastScript bs = BlastScript.FromText(script);
+            bs["value"] = 2;
 
-                BlastError res = bs.Execute(blast);
+            BlastError res = bs.Execute();
 
-                Xunit.Assert.True(bs["result"] == 3);
-                Xunit.Assert.True(res == BlastError.success);
-            }
+            Assert.IsTrue(bs["result"] == (object)3f);
+            Assert.IsTrue(res == BlastError.success);
 ``` 
 Repeated Use:
 
 ```csharp
-            // somewhere blast has to be initialized, all threads can use this same object
-            // it provides functionpointers, constants and other information needed for execution
-            Blast blast = Blast.Create(Allocator.Persistent); 
-    
+            // initializes a static instance
+            Blast.InitInstance();
+
             // create a script package from text 
             BlastScript bs = BlastScript.FromText("result = 1 + value;");
-            bs.Prepare(blast); 
+          
+            // prepare it for execution (compiles script package)
+            bs.Prepare();
 
             // run in a loop, using different inputs 
-            BlastError res = BlastError.success; 
-            for(int i = 0; i < 100000, res == BlastError.success; i++)
+            BlastError res = BlastError.success;
+            for (int i = 0; i < 100000 && res == BlastError.success; i++)
             {
                 bs["value"] = i;
-                
-                res = bs.Execute(blast);                
-                if(res == BlastError.success)
+
+                res = bs.Execute();
+                if (res == BlastError.success)
                 {
-                    float result = bs["result"];  
+                    float result = (float)bs["result"];
                 }
             }
-            
-            // at the end of the program, cleanup blast 
-            blast.Destroy(); 
-
 ```
 
 SSMD | Single Script Multiple Data execution 
@@ -67,8 +62,4 @@ usage will simplify
                 // execute script with n * input data
                 res = blast.Execute(package.Package, IntPtr.Zero, new IntPtr(ssmd_data), n);
             }
-
 ``` 
-
-
-
