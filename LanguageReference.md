@@ -2,9 +2,7 @@
 
 # BLAST Language Reference 
 
-[BLAST Overview](README.md)
-
-[Namespace (doxygen)](Namespace/_Sidebar.md)
+[BLAST Overview](README.md) - [Namespace (doxygen)](Namespace/_Sidebar.md) - [Examples](examples.md)
 
 ### Statement Keywords
 
