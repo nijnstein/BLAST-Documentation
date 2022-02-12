@@ -14,13 +14,12 @@ Single use:
 
             BlastError res = bs.Execute();
 
-            Assert.IsTrue(bs["result"] == (object)3f);
-            Assert.IsTrue(res == BlastError.success);
+            Xunit.Assert.True(bs["result"] == (object)3f);
+            Xunit.Assert.True(res == BlastError.success);
 ``` 
 Repeated Use:
 
 ```csharp
-            // initializes a static instance
             Blast.InitInstance();
 
             // create a script package from text 
@@ -48,18 +47,29 @@ SSMD | Single Script Multiple Data execution
 usage will simplify
 
 ```csharp
-    
-            using(Blast blast = Blast.Create(Allocator.Persistent))
+            int n = 1024; 
+            using (Blast blast = Blast.Create(Allocator.Persistent))
             {
-                BlastScript bs = BlastScript.FromText("result = 1 + value;"); 
-                BlastError res = bs.Package(BlastCompilerOptions.SSMD.Trace());
+                BlastScript bs = BlastScript.FromText("result = 1 + value;");
+                BlastError res = Blast.Package(blast.Engine, bs, BlastCompilerOptions.SSMD.Trace());
 
-                byte* data = stackalloc byte[package.Package.SSMDDataSize * n];
+                unsafe
+                {
+                    // allocate datasegments  
+                    byte* data = stackalloc byte[bs.Package.Package.SSMDDataSize * n];
+                    BlastSSMDDataStack* ssmd_data = (BlastSSMDDataStack*)(void*)data;
 
-                BlastSSMDDataStack* ssmd_data = (BlastSSMDDataStack*)(void*)data;
-                package.Package.CloneDataStack(n, ssmd_data);
+                    // clone default data 
+                    bs.Package.Package.CloneDataStack(n, ssmd_data); 
 
-                // execute script with n * input data
-                res = blast.Execute(package.Package, IntPtr.Zero, new IntPtr(ssmd_data), n);
+                    // set value (                    
+                    for(int i = 0; i < n; i++)
+                    {
+                        ssmd_data[i].a[0] = i; 
+                    }
+
+                    // execute script with n * input data
+                    res = blast.Execute(bs.Package.Package, IntPtr.Zero, new IntPtr(ssmd_data), n);
+                }
             }
 ``` 
