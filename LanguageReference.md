@@ -4,6 +4,62 @@
 
 [BLAST Overview](README.md) - [Namespace (doxygen)](Namespace/_Sidebar.md) - [Examples](examples.md)
 
+### BlastScript 
+
+-A blast script is a collection of statements seperated by dotcomma's and grouped by parenthesis.
+
+Blastscript sample:
+```csharp
+#input position float3 0 0 0                   
+position.x = min(100, position.x + 0.001);                    
+```
+
+Full C# GameObject example:
+```csharp
+public class Single2 : MonoBehaviour
+{
+    BlastScript script;
+
+    void Start()
+    {
+        Blast.Initialize();
+
+        // prepare the script once 
+        script = BlastScript.FromText("#input position float3 0 0 0\n position.x = min(100, position.x + 0.001);");
+
+        BlastError result = script.Prepare();
+        if (result != BlastError.success)
+        {
+            Debug.LogError($"Error during script compilation: {result}");
+            script = null; 
+        }
+    }
+
+    void Update()
+    {
+        if (script == null) return; 
+
+        // the each frame, update current position 
+        script["position"] = (float3)transform.position;
+
+        // execute the script
+        BlastError result = script.Execute(); 
+        if (result == BlastError.success)
+        {
+            // and set value 
+            transform.position = (float3)script["position"];
+        }
+        else
+        {
+            Debug.LogError($"Error during script execution: {result}"); 
+        }
+       
+    }
+}
+```
+
+
+
 ### Statement Keywords
 
 |keyword|description|
