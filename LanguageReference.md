@@ -286,6 +286,21 @@ Blast uses function pointers to connect to other parts of its environment, these
 |caller|user|optional pointer to native data containing all data supplied by the callsite|
 |parameters|blast|blast will call the external function using the parameters supplied to it by script|
 
+***supports only single floats, future versions will expand on this***
+
+Blast will use all components of the supplied input parameters to satify the functions parameter list:
+
+```csharp
+ a = (1 1 1);
+ external(a); 
+```
+
+Is equivalent to: 
+```csharp
+ a = (1 1 1);
+ external(a.x, a.y, a.z); 
+```
+
 #### BlastFunction Attribute
 
 An attribute can be used to attach to static methods, blast will reflect the loaded assemblies and attempts to register all static methods with this attribute on startup.
