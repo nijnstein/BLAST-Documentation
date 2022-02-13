@@ -230,6 +230,41 @@ Blast uses function pointers to connect to other parts of its environment, these
 |caller|user|optional pointer to native data containing all data supplied by the callsite|
 |parameters|blast|blast will call the external function using the parameters supplied to it by script|
 
+#### BlastFunction Attribute
+
+An attribute can be used to attach to static methods, blast will reflect the loaded assemblies and attempts to register all static methods with this attribute on startup.
+
+```csharp
+        [BurstCompatible] [BlastFunction]
+        static public float AttributeTest1(float b)
+        {
+            return b * 2; 
+        }
+  
+        [BurstCompatible] [BlastFunction(name: "test")]
+        static public float AttributeTest2(float b)
+        {
+            return b * 2; 
+        }
+```
+
+
+#### [BS1] Supported prototypes
+
+```csharp 
+    // full paramater list (including enviroment data), up until 16 float params
+    public delegate float BlastDelegate_f1(IntPtr engine, IntPtr data, IntPtr caller, float a);
+    public delegate float BlastDelegate_f11(IntPtr engine, IntPtr data, IntPtr caller, float a, float b);
+    public delegate float BlastDelegate_f111(IntPtr engine, IntPtr data, IntPtr caller, float a, float b, float c);
+    // ......
+    public delegate float BlastDelegate_f1111(IntPtr engine, IntPtr data, IntPtr caller, float a, float b, float c, float d...... , float 16);
+    
+    // short external defines without environment pointers 
+    public delegate float BlastDelegate_f0_s();
+    public delegate float BlastDelegate_f1_s(float a);
+    public delegate float BlastDelegate_f11_s(float a, float b);
+
+``` 
 
 ### Data Synchronization
    [DataSync]: /url "Data Synchronization"
