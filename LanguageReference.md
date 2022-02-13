@@ -202,7 +202,7 @@ To get the component of a vector it can be indexed: `a.x`
 
 Blast allows the user to define inline functions, a function consists of the function keyword, a parameterlist (that even if empty may not be ommited) and a body: 
 
-```
+```csharp
 function f1(a, b) 
 (
    c = a + b;  
