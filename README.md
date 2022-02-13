@@ -261,33 +261,33 @@ See (Language Reference)[LanguageReference.md] for an overview of all built in f
    h = max(f, g);
 ``` 
 
-#### External
+#### External Function Definitions
 
 Blast can call external functions that have been burst compiled and registered in the blast api used during compilation and execution.
 
-An external function example in c#: (parameters will change to some handy structs) 
-```csharp
-    [BurstCompile]
-    unsafe public static float GetTeamId(IntPtr ptr_engine, IntPtr ptr_data, IntPtr ptr_caller, float actor_index)
-    {
-        SimulationHandlerData* data = (SimulationHandlerData*)ptr_data.ToPointer();
-        SimulationCommand* caller = (SimulationCommand*)ptr_caller.ToPointer();
+An external function example in c#
 
-        if (actor_index < 0)
+```csharp
+	// the declaration:
+	[BurstCompatible]
+        static public float ExternalTest(IntPtr blast, IntPtr env, IntPtr caller, float a, float b)
         {
-            return data->ActorStore.Team(caller->actor_index).TeamIndex;
+            return a * b; 
         }
-        else
-        {
-            return data->ActorStore.Team((int)actor_index).TeamIndex;
-        }
-    }
+	
+	// the registration: 
+	Blast.ScriptAPI.Register(ExternalTest);
 ```
 
-The current registration, which will be simplified further shortly:
+Functions can also be identified with BlastFunctionAttributes, blast will enumerate these on startup and registers them as external function calls. 
 
-```csharp 
-   API.RegisterExternal("GetTeamId", ReturnType.ID, new Blast.BlastDelegate_f1(SimulationBlastHandlerFunctions.GetTeamId), "actor_index");
+``` 	
+        [BurstCompatible]
+        [BlastFunction]
+        static public float AttributeTest(float b)
+        {
+            return b * 2; 
+        }
 ```
 
 #### Inline Functions | Macros
