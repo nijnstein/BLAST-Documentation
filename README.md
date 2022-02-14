@@ -224,6 +224,41 @@ Allow BLAST to compile the script into c# burst compatible function pointers, th
 
 This should void a big drawback of using a scripting engine to do a lot of tasks in a simulation where every millisecond counts.
 
+**Registration of known scripts from code during development:   **
+
+```csharp
+/// <summary>
+/// design time definition of a script, any derived class with filled code will be precompiled into a burst function
+/// </summary>
+class BlastScript1 : BlastScript
+{
+    bs1() {
+        Name = "bs_designtime_1";
+        Code = @"
+            #input position float3 0 0 0
+            position = position + random(-0.01, 0.01);
+            position = min((100 100 100), max((-100, -100, -100), position));";
+    }
+};
+
+
+/// <summary>
+/// any string field, decorated with the BlastScriptAttribute will be precompiled during build into a bursted function 
+/// </summary>
+class BlastScripts
+{
+
+    [BlastScript(Name = "bs_designtime_2")]
+    const string bs2 = @"
+            #input position float3 0 0 0
+            position = position + random(-0.01, 0.01);
+            position = min((100 100 100), max((-100, -100, -100), position));";
+
+
+}
+```
+
+
 ##### NoStack 
 Dont allocate package memory for stacks, instead uses interpretor's stack.
 
