@@ -108,6 +108,16 @@ Blast uses bytecode operations to index a datasegment for variable and stack dat
 _If for example_ blast is used to control a statemachine its state-ids could be stored in constants potentially saving many bytes in the compiled package and datasegment.
 
 #### Defaultly mapped constants:
+|constant|source|value|
+|--------|------|-----|
+|PI|math.pi||
+|1/PI|1/math.pi||
+|framecount|UnityEngine.Time.frameCount|frame count since start|
+|fixedtime|UnityEngine.Time.fixedTime|fixed time at start of interval|
+|time|UnityEngine.Time.time|time at start of interval|
+|fixeddeltatime|UnityEngine.Time.fixedDeltaTime|delta of fixed interval|
+|deltatime|UnityEngine.Time.deltaTime|delta of normal interval = frametime|
+
 
 ```csharp
                 case blast_operation.pi: return math.PI;
