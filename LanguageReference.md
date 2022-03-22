@@ -336,7 +336,16 @@ Blast uses the input and output keywords to define input or output variables. Th
  
 <img width="476" alt="packagemode" src="https://user-images.githubusercontent.com/96932314/159478223-43b28385-b8a3-4761-b8e6-aab1e247660c.PNG">
 
-#### Basic Use 
+### Stacksize Determination
+Blast determines the size of the stack to allocate as follows:
+
+- First; if **stack_size** is defined as:  `#define stack_size 12` blast will fix the stacksize to 12 bytes
+- Second; blast looks at the compileroptions, if DefaultStackSize >= 0 then this value will be used. Specify -1 to disallow stack use (force stacksize to 0).
+- Third; if compileroptions specify **EstimateStack** then during compilation the package is executed once using default data and the stack size is determined from analysis of the stack. Note that this will force an extra compilation step if the packagemode is ssmd as currently stack estimation is only supported by the normal package mode which will always use more stack then the ssmd packager. (which should not matter too much if the no-stack option is used to use the threadlocal stack in the interpretor and not actually package the stack in the package memory) 
+- Fourth; if by now no stacksize is known, blast will count overlapping pairs of push-pop pairs and estimates stack from that. If no push command is used then the stacksize will be set to 0; 
+
+
+### Basic Use 
 
 Use methods provided by the BlastScript class to read or write to script variables exposed via input and/or output, it is not necessary to use input nor output defines but doing so forces their memoryorder regardless the code written and should be considered good practice, the can be omitted but you will have to directly write to the datasegments to set variables by name.
 
