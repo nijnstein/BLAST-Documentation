@@ -553,7 +553,7 @@ ae = 1 & 2 & 3 & 4 & 5;
 ag = 1 * 10 * 3 * (3 + 4 * 2);
 ```
 
-Vector example with some script debuging features and insights into BLAST's stack usage, it uses less data and code bytes while keeping execution flat for the interpretation allowing it to use less memory on the target cpu:
+Vector example with some script debuging features and insights into BLAST's stack usage, it uses less data and code bytes while keeping execution flat for the interpretation allowing it to use less memory on the target cpu. Note difference between ssmd and normal packaging in code and datasegment, in normal mode constant data is allocated in the datasegment while for ssmd constant data is inlined optimizing for many executions of the same code with different data. 
 ```csharp
 
  a = maxa((1 2 3), (4 5 6), (7 8 9));
@@ -561,7 +561,7 @@ Vector example with some script debuging features and insights into BLAST's stac
  debug(a); 
  debugstack(); 
 
-# compiler node tree
+# compiler node tree (PackageMode == normal|ssmd)
 # 
 #    root of 6 
 #       function push 
@@ -603,10 +603,13 @@ Vector example with some script debuging features and insights into BLAST's stac
 #    /
 # 
 # 
-# 000  024 018 131 089 132 019 024 018 088 129 
-# 010  130 019 024 018 085 086 087 019 001 128 
-# 020  049 013 025 025 025 000 018 255 244 128 
-# 030  019 018 255 243 019 000      
+# Packagemode == Normal:
+# 
+# push vector  51 7 8 9 push vector  51 4 5 6 push vector  51 1 2 3 setf a  50 | pop pop pop nop 
+#
+# 000| 033 051 131 089 132 033 051 088 129 130 
+# 010| 033 051 085 086 087 003 128 050 013 032 
+# 020| 032 032 000 
 # 
 # Blast.Debug - codepointer: 29, id: 128, NUMERIC: 9,00, vectorsize: 1
 # 
@@ -615,7 +618,22 @@ Vector example with some script debuging features and insights into BLAST's stac
 # DATA  2 = 6   1  Numeric        // [2] == 6 => numeric data, not in constants 
 # DATA  3 = 7   1  Numeric        // [3] == 7 => numeric data, not in constants 
 # DATA  4 = 9   1  Numeric        // [4] == 8 => numeric data, not in constants    
+#
+#
+#
+# Packagemode == SSMD:
+#
+# push vector  51 cf1h #224 #064 8 cf1h #016 #065 push vector  51 4 cf1h #160 #064 cf1h #192 #064 push vector  51 1 2 3 setf a  50 | pop pop pop nop 
+#
+# 000| 033 051 064 224 064 089 064 016 065 033 
+# 010| 051 088 064 160 064 064 192 064 033 051 
+# 020| 085 086 087 003 128 050 013 032 032 032 
+# 030| 000 
+#
+# DATA  0 = 9   1  Numeric        // [0] == numeric[1] assigned by var a 
+
 ```
+
 
 
 Example output for nested functions, the results are pushed and popped when needed. This ensures no recursion or stacking of register data during interpretation. The script code `debug(max((1 + 2), 2)); ` or `debug(max(1 + 2, 2));` results int the following output:
