@@ -345,6 +345,9 @@ Blast determines the size of the stack to allocate as follows:
 - Fourth; if by now no stacksize is known, blast will count overlapping pairs of push-pop pairs and estimates stack from that. If no push command is used then the stacksize will be set to 0; 
 
 
+Then if Yield is used in the package, 20 bytes are additionally allocated to support stacking internal state on yield.
+
+
 ### Basic Use 
 
 Use methods provided by the BlastScript class to read or write to script variables exposed via input and/or output, it is not necessary to use input nor output defines but doing so forces their memoryorder regardless the code written and should be considered good practice, the can be omitted but you will have to directly write to the datasegments to set variables by name.
