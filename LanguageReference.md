@@ -340,13 +340,10 @@ Blast uses the input and output keywords to define input or output variables. Th
 Blast determines the size of the stack to allocate as follows:
 
 - First; if **stack_size** is defined as:  `#define stack_size 12` blast will fix the stacksize to 12 bytes
-- Second; blast looks at the compileroptions, if DefaultStackSize >= 0 then this value will be used. Specify -1 to disallow stack use (force stacksize to 0).
-- Third; if compileroptions specify **EstimateStack** then during compilation the package is executed once using default data and the stack size is determined from analysis of the stack. Note that this will force an extra compilation step if the packagemode is ssmd as currently stack estimation is only supported by the normal package mode which will always use more stack then the ssmd packager. (which should not matter too much if the no-stack option is used to use the threadlocal stack in the interpretor and not actually package the stack in the package memory) 
-- Fourth; if by now no stacksize is known, blast will count overlapping pairs of push-pop pairs and estimates stack from that. If no push command is used then the stacksize will be set to 0; 
-
-
-Then if Yield is used in the package, 20 bytes are additionally allocated to support stacking internal state on yield.
-
+- Second; if compileroptions specify **EstimateStack** then during compilation the package is executed once using default data and the stack size is determined from analysis of the stack. Note that this will force an extra compilation step if the packagemode is ssmd as currently stack estimation is only supported by the normal package mode which will always use more stack then the ssmd packager. (which should not matter too much if the no-stack option is used to use the threadlocal stack in the interpretor and not actually package the stack in the package memory) 
+- Third; if by now no stacksize is known, blast will count overlapping pairs of push-pop pairs and estimates stack from that. If no push command is used then the stacksize will be set to 0; 
+- Fourth; if Yield is used in the package, 20 bytes are additionally allocated to support stacking internal state on yield.
+- Finally: if the defaultstacksize set in compileroptions is higher then this value will be used, if it is lower (but >0) then the estimated stacksize a warning will be logged in trace builds.
 
 ### Basic Use 
 
