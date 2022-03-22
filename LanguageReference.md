@@ -103,9 +103,11 @@ Indexing: .[x|y|z|w|r|g|b|a]
 
 ### Constant data 
 
-Blast uses bytecode operations to index a datasegment for variable and stack data. Any constant value that is not internally mapped to a bytecode will be packaged in the datasegment. Blast map's several often used values like 0, 1, 2, pi and others to byte sized opcodes, this can save a lot of room in the datasegment depending on how well the scripts match to the constant data. For maximum efficiency users should overwrite blasts default constant table with their own.
+First off, there is no constant analysis used for removing unneeded constant statements, future versions might decide to remove constant statements leading to unused values but for now blast wont botter.
 
-_If for example_ blast is used to control a statemachine its state-ids could be stored in constants potentially saving many bytes in the compiled package and datasegment.
+Blast uses bytecode operations to index a datasegment for variable and stack data. Any constant value that is not internally mapped to a bytecode will be packaged in the datasegment. Blast map's several often used values like 0, 1, 2, pi and others to byte sized opcodes, this can save a room in the datasegment depending on how well the scripts match to the constant data. Mad users could overwrite blasts default constant table with their own.
+
+In SSMD packaging mode constants are inlined into the code segment to avoid duplicate data in many datasegments at the cost of some performance while in normal packaging mode constant data is always referenced as if it was a data element. 
 
 #### Defaultly mapped constants:
 |constant|source|value|
@@ -311,25 +313,6 @@ Is equivalent to:
  external(a.x, a.y, a.z); 
 ```
 
-#### BlastFunction Attribute
-
-An attribute can be used to attach to static methods, blast will reflect the loaded assemblies and attempts to register all static methods with this attribute on startup.
-
-```csharp
-        [BurstCompatible] [BlastFunction]
-        static public float AttributeTest1(float b)
-        {
-            return b * 2; 
-        }
-  
-        [BurstCompatible] [BlastFunction(name: "test")]
-        static public float AttributeTest2(float b)
-        {
-            return b * 2; 
-        }
-```
-
-
 #### [BS1] Supported prototypes
 
 ```csharp 
@@ -349,7 +332,7 @@ An attribute can be used to attach to static methods, blast will reflect the loa
 
 ### Data Synchronization
    [DataSync]: /url "Data Synchronization"
-Blast uses the input and output keywords to define input or output variables. These will be prepared in the compiled package for fast IO syncs, the sync method however depends heavily on the packaging mode and its usage. Samples for each mode (Normal, SSMD, Entity) will be provided shortly;
+Blast uses the input and output keywords to define input or output variables. These will be prepared in the compiled package for fast IO syncs, the sync method however depends heavily on the packaging mode and its usage. Samples for each mode (Normal, SSMD) will be provided with the package.
 
 #### Basic Use 
 
