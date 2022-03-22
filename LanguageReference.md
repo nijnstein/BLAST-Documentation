@@ -334,6 +334,9 @@ Is equivalent to:
    [DataSync]: /url "Data Synchronization"
 Blast uses the input and output keywords to define input or output variables. These will be prepared in the compiled package for fast IO syncs, the sync method however depends heavily on the packaging mode and its usage. Samples for each mode (Normal, SSMD) will be provided with the package.
 
+<img width="600"  src="https://github.com/nijnstein/BLAST-Documentation/packagemode.PNG">
+
+
 #### Basic Use 
 
 Use methods provided by the BlastScript class to read or write to script variables exposed via input and/or output, it is not necessary to use input nor output defines but doing so forces their memoryorder regardless the code written and should be considered good practice, the can be omitted but you will have to directly write to the datasegments to set variables by name.
