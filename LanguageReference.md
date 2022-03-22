@@ -333,9 +333,8 @@ Is equivalent to:
 ### Data Synchronization
    [DataSync]: /url "Data Synchronization"
 Blast uses the input and output keywords to define input or output variables. These will be prepared in the compiled package for fast IO syncs, the sync method however depends heavily on the packaging mode and its usage. Samples for each mode (Normal, SSMD) will be provided with the package.
-
-<img width="600"  src="https://github.com/nijnstein/BLAST-Documentation/packagemode.PNG">
-
+ 
+<img width="476" alt="packagemode" src="https://user-images.githubusercontent.com/96932314/159478223-43b28385-b8a3-4761-b8e6-aab1e247660c.PNG">
 
 #### Basic Use 
 
