@@ -44,8 +44,58 @@ Repeated Use:
 
 SSMD | Single Script Multiple Data execution 
 
-usage will simplify
+General use:
+```csharp
+        // prepare an ssmd compiled script as:
+        // '#input a float4\n#input b float4\n#input c float4\na = a * b + c;'
+                
+        // a struct mapped to the data used in a script for ease of use
+        [Serializable]
+        [StructLayout(LayoutKind.Sequential)]
+        public struct data
+        {
+            public float4 a;
+            public float4 b;
+            public float4 c;
+        }
+        
+        // the processing of some random data 
+        NativeArray<data> data_array = new NativeArray<data>(DataCount, Allocator.Persistent);
+        {
+            for (int i = 0; i < DataCount; i++)
+            {
+                data_array[i] = new data()
+                {
+                    a = 100f * i,
+                    b = 101f * i,
+                    c = 100.1f * i
+                };
+            }
 
+            // execute the script
+            BlastError result = script.Execute(data_array);
+
+            if (result == BlastError.success)
+            {
+                // show results 
+                StringBuilder sb = StringBuilderCache.Acquire();
+                for (int i = 0; i < DataCount; i++)
+                {
+                    sb.AppendLine($"a = {data_array[i].a}");
+                }
+                DataView = StringBuilderCache.GetStringAndRelease(ref sb);
+            }
+            else
+            {
+                DataView = $"Error: {result}, check the logs for more details";
+            }
+        }
+        data_array.Dispose();
+``` 
+
+
+
+Advanced use: 
 ```csharp
             int n = 1024; 
             using (Blast blast = Blast.Create(Allocator.Persistent))
