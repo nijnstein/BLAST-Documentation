@@ -141,6 +141,11 @@ f = 4 * -9.3
 b = 1 & 0 | 1; 
 b = -1 & 0 | 123.22;
 b = true & false | true; 
+
+// bit operations:
+flags = 00100000_00000000_00000000_00000000;  
+if(get_bits(flags, mask)) then (set_bit(flags, 2, 0);); 
+
 ``` 
 
 Vectors are defined as sets of values enclosed in parenthesis without operators combining them. A comma is used to seperate elements to remove any ambiguity when using negative constants.
@@ -152,6 +157,13 @@ a = (1 2 3 4) * (5 6 7, -8);
 ```
 
 To get the component of a vector it can be indexed: `a.x` 
+
+### Datatypes 
+
+The only datatype fully supported is the float of vectorsize 1 to 4. There is partial support for bool32 operations which index a single dataelement as 32 bit flags.
+
+- Future versions will add integer datatypes.
+
 
 ### Built in functions 
    [Functions]: /url "Script API Functions"
@@ -202,6 +214,8 @@ To get the component of a vector it can be indexed: `a.x`
 |radians||||
 |random|generate a random number|||
 |remap||||
+|reinterpret_bool32||||
+|reinterpret_float||||
 |rsqrt||||
 |saturate||||
 |seed|seed the random number generator|||
