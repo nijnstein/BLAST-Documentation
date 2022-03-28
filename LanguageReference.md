@@ -2,6 +2,8 @@
 
 # BLAST Language Reference 
 
+**DISCLAIMER** BLAST is new, partly experimental and under active development, bugs are to be expected and please create an issue for any issue there might be so we can handle it as quickly as possible. 
+
 [BLAST Overview](README.md) - [Namespace (doxygen)](Namespace/_Sidebar.md) - [Examples](examples.md)
 
 ### BlastScript 
