@@ -396,6 +396,19 @@ switch(a > b)
 #validate e 11111                 
 ```
 
+#### Runtime validation 
+To validate values in runtime use the Validate(id, value) function. This will compare the value to the value of the id and if different it will raise an error during interpretation in TRACE and DEBUG modes. This function will not be compiled in release mode.
+
+**A typical testing script in our unittests using Validate()**
+```
+#input a float 0
+b = 00000001_00000000_00000000_00000000;
+a = get_bit(b, 7); 
+debug(a); 
+debug(b); 
+validate(a, 1);
+```
+
 
 
 
