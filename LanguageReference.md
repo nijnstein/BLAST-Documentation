@@ -102,78 +102,29 @@ Comparisons: ` = < <= > >= != `
 Indexing: .[x|y|z|w|r|g|b|a]
 
 ### Constant data 
-
 First off, there is no constant analysis used for removing unneeded constant statements, future versions might decide to remove constant statements leading to unused values but for now blast wont botter.
 
-Blast uses bytecode operations to index a datasegment for variable and stack data. Any constant value that is not internally mapped to a bytecode will be packaged in the datasegment. Blast map's several often used values like 0, 1, 2, pi and others to byte sized opcodes, this can save a room in the datasegment depending on how well the scripts match to the constant data. Mad users could overwrite blasts default constant table with their own.
+Blast uses bytecode operations to index a datasegment for variable and stack data. Any constant value that is not internally mapped to a bytecode will be packaged in the datasegment. Blast map's several often used values like 0, 1, 2, pi and others to byte sized opcodes.
 
-In SSMD packaging mode constants are inlined into the code segment to avoid duplicate data in many datasegments at the cost of some performance while in normal packaging mode constant data is always referenced as if it was a data element. 
+#### Inlined constant data:
+In SSMD packaging mode constants are inlined into the code segment to avoid duplicate data in many datasegments at the cost of some performance while in normal packaging mode constant data is always referenced as if it was a data element. Any constant referenced multiple times is defined once in the code segment after which it is referenced by instructions: `constant_ref | constant_long_ref`
 
-#### Defaultly mapped constants:
+This has the benefit that constant data elements dont substract from the usable variable element count in the script. 
+
+#### Named constants:
+
 |constant|source|value|
 |--------|------|-----|
-|PI|math.pi||
-|1/PI|1/math.pi||
 |framecount|UnityEngine.Time.frameCount|frame count since start|
 |fixedtime|UnityEngine.Time.fixedTime|fixed time at start of interval|
 |time|UnityEngine.Time.time|time at start of interval|
 |fixeddeltatime|UnityEngine.Time.fixedDeltaTime|delta of fixed interval|
 |deltatime|UnityEngine.Time.deltaTime|delta of normal interval = frametime|
-
-
-```csharp
-                case blast_operation.pi: return math.PI;
-                case blast_operation.inv_pi: return 1 / math.PI;
-                case blast_operation.epsilon: return math.EPSILON;
-                case blast_operation.infinity: return math.INFINITY;
-                case blast_operation.negative_infinity: return -math.INFINITY;
-                case blast_operation.nan: return math.NAN;
-                case blast_operation.min_value: return math.FLT_MIN_NORMAL;
-                case blast_operation.value_0: return 0f;
-                case blast_operation.value_1: return 1f;
-                case blast_operation.value_2: return 2f;
-                case blast_operation.value_3: return 3f;
-                case blast_operation.value_4: return 4f;
-                case blast_operation.value_8: return 8f;
-                case blast_operation.value_10: return 10f;
-                case blast_operation.value_16: return 16f;
-                case blast_operation.value_24: return 24f;
-                case blast_operation.value_32: return 32f;
-                case blast_operation.value_64: return 64f;
-                case blast_operation.value_100: return 100f;
-                case blast_operation.value_128: return 128f;
-                case blast_operation.value_256: return 256f;
-                case blast_operation.value_512: return 512f;
-                case blast_operation.value_1000: return 1000f;
-                case blast_operation.value_1024: return 1024f;
-                case blast_operation.value_30: return 30f;
-                case blast_operation.value_45: return 45f;
-                case blast_operation.value_90: return 90f;
-                case blast_operation.value_180: return 180f;
-                case blast_operation.value_270: return 270f;
-                case blast_operation.value_360: return 360f;
-                case blast_operation.inv_value_2: return 1f / 2f;
-                case blast_operation.inv_value_3: return 1f / 3f;
-                case blast_operation.inv_value_4: return 1f / 4f;
-                case blast_operation.inv_value_8: return 1f / 8f;
-                case blast_operation.inv_value_10: return 1f / 10f;
-                case blast_operation.inv_value_16: return 1f / 16f;
-                case blast_operation.inv_value_24: return 1f / 24f;
-                case blast_operation.inv_value_32: return 1f / 32f;
-                case blast_operation.inv_value_64: return 1f / 64f;
-                case blast_operation.inv_value_100: return 1f / 100f;
-                case blast_operation.inv_value_128: return 1f / 128f;
-                case blast_operation.inv_value_256: return 1f / 256f;
-                case blast_operation.inv_value_512: return 1f / 512f;
-                case blast_operation.inv_value_1000: return 1f / 1000f;
-                case blast_operation.inv_value_1024: return 1f / 1024f;
-                case blast_operation.inv_value_30: return 1f / 30f;
-                case blast_operation.inv_value_45: return 1f / 45f;
-                case blast_operation.inv_value_90: return 1f / 90f;
-                case blast_operation.inv_value_180: return 1f / 180f;
-                case blast_operation.inv_value_270: return 1f / 270f;
-                case blast_operation.inv_value_360: return 1f / 360f;
-```
+|epsilon|math.EPSILON||
+|infinity|math.INFINITY||
+|negative_infinity|-math.INFINITY||
+|nan|math.NAN||
+|min_value|math.FLT_MIN_NORMAL||
 
 ### Assignments | Expressions
 
@@ -400,7 +351,7 @@ If yield is used, all memory used for script execution must map to the IComponen
 The scripts datasegment is packed as with entities but not matched to any structure, it might also not be complete depending on any constant data in it. In SSMD mode there is no stack allocated in the datasegment and in the future it will inline any constant data in the code datastream to maximize memory efficiency when running many billions of scripts each second.
 
 ##### Yield
-Yield is not supported. 
+Yield is not supported yet. 
 
 
 ### Data Validation
