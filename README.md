@@ -24,9 +24,7 @@ In many situations things boil down to a handler executing actions, either prede
 - Integrates with DOTS
 - Uses BURST function pointers to connect to basic functionality in its environment. 
 - Seperation of code, data and stack
-- Editor/Build time functionality to convert scripts into bursted function pointers with no difference in usage to the developer but with native performance.
-- SSMD mode, executes multiple script with simular controlflow but different data at once as if they were vectors
-- Hybrid register/stackbased interpretor 
+- SSMD mode, executes multiple script with simular controlflow but different data at once as if they were vectors. **Current no control flow support**
 - Interpretation is BURST compatible.
 - Unmatched performance. 
 
@@ -68,17 +66,13 @@ Everything between  `(` and `)` is called a compound, a compound may have severa
 
 #### Data Types & Sizes 
 
-There is limited datatype support: 
+There is limited datatype support, this will change in future versions: 
 
 ```csharp Unknown: determined at runtime 
 
-Numeric: 1.0 etc
+full support: NUMERIC, vectorsize 1-4
+partial support: BOOL32 
 
-ID: Integers
-
-Vectors:  ID(n) and NUMERIC(n), 
-          id(3)       => (1 2 3)
-          NUMERIC(3)  =>  (1.2 2.3 2.45)
 ```
 
 ##### External Data Access 
@@ -86,23 +80,8 @@ Vectors:  ID(n) and NUMERIC(n),
 BLAST connects to its enviroment in several ways
 
 - data can be communicated through the packagadata of the script by setting up its values
-- data can be mapped to a DOTS IComponentData structure
+- data can be mapped to a DOTS IComponentData structure or any other segment of memory
 - data can be exchanged through functionpointers registered in BLAST connection data from your simulation with the script engine. 
-
-##### No Native Array Support
-
-BLAST will not directly support arrays or pointers as datatypes. Instead it expects users to create an api to their simulation to query by the script. Its straightforward to devise functions in unity and connect them to blast and to end up like so: 
-
-```csharp
- while(i < get_actor_count())
- (
-     m1 = get_actor_data(i); 
- )
-
-```
-
-_ This will also allow us to cache data efficiently in future versions. _
-
 
 #### Vectors
 Vectors may be defined based on all supported datatypes and functions, constant and functions may be mixed but the number of dataelements must be equal for each element defined in the vector. 
@@ -116,9 +95,6 @@ Vectors may be defined based on all supported datatypes and functions, constant 
 - Vectors can be used in all operations that can be used with other variables of the same datatype (numeric, id)
 - Due to restrictions set by the project we will not allow unlimited vector length (see arrays), this depends on a function used to decode the opcodes for functions and that in turn depends on the language version (information follows) 
 - The minimal support will (in all languageversions) be: size 1, 2, 3 and 4; other sizes are under discussion as the current encoding schema allows for only 8 different lengths (8 differing lengths, not max 8)
-
-##### Vector mapping assumptions
-Vectors map automatically to matrices of the same element size: n(9) => m(3x3), n(12) => m(3x4) | m(4x3) etc. 
 
 #### Language Versions
 Different language versions allow the interpretor(s) to differntiate between very distinct outputs depending on compiler settings. 
@@ -143,8 +119,6 @@ Boolean operators:      `& | ^ !`
 
 Boolean evaluators:     `< > <= >= = ! !=`
 
-Ternary operator:       `[condition] ? [true] : [false]`   **BS2**
-
 Assignment:             `=`
 
 Enclosures:             `( )`
@@ -156,10 +130,6 @@ Value seperator:        `,`
 Decimal seperator:      `.` 
 
 Indexer                 `.`  
-
-IndexOpen               `[`   **BS2**
-
-IndexClose              `]`   **BS2**
 
 Identifier: 	          `[a..z][0..9|a..z]*[.|[][a..z][0..9|a..z]*[]]`
 
@@ -222,6 +192,9 @@ Different package modes for different needs:
 
 
 ##### HPC Compilation
+
+**Not supported in current release**
+
 Allow BLAST to compile the script into c# burst compatible function pointers, this allows native performance for known scripts while keeping the same workflow in decision libraries. This way there is no performance hit running compile time known scripts at runtime in your simulation. Only runtime compiled scripts will take the performance hit of being interpreted. This will allow the developer to create 1 code path and to not worry too much about performance. Note however, for SSMD operation the compiler will still need bytecode as it is not possible to run in single script multiple data mode using native compiled code. 
 
 - an example of use would be updating behaviour or balancing scripts in multiplayer games on server login, a later binary update of the game might provide the same scripts hardcoded in an update without any alteration in code paths for the developer of that game. 
@@ -322,7 +295,6 @@ Functions can also be identified with BlastFunctionAttributes, blast will enumer
 
 ``` 	
         [BurstCompatible]
-        [BlastFunction]
         static public float AttributeTest(float b)
         {
             return b * 2; 
