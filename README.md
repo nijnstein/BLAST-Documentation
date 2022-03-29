@@ -5,10 +5,16 @@
 
 [Language Reference](LanguageReference.md) - [Namespace (doxygen)](Namespace/_Sidebar.md) - [Examples](examples.md)
 
+**Disclaimer:** This is a partly experimetal package, anything listed in the documentation is guaranteed to be supported indefinately, the rest is under active development and very open for suggestions. Please log any issues at https://github.com/nijnstein/BLAST-Documentation/issues so we can handle them as efficiently as possible.
+
 ## SSMD
 ### Single Script Multiple Data
 
 In many large scale simulations many scripts are mostly the same but with different data. BLAST can execute those with the control flow inverted, meaning that it in essence performs the SIMD equivelent of scripting languages, each operation will translate in a vector operation easily compiled to beautiful packed assembly. This can result in script running faster then native code dueue to the ways memory is forced to be and execution is performed. Usually this kind of optimization is not simply possible in real-life situations with compiled code. In SSMD mode, BLAST can handle scripts faster then native code in single execution. It shows how it becomes possible to optimize otherwise hard to optimize parts, especially if they were entered by a user in an online game were there is no control. 
+
+#### But HOW? 
+
+In many situations things boil down to a handler executing actions, either predefined or defined by configuration. If each action is implemented in .net code then when handling many actions as they occur results in calling each action seperately, in a loop or not. Its whole sequence of operations is executed from start until end. Scripting languages normally do the same and when used to handle states in a statemachine they offer a flexible and configuratable but slow solution. BLAST's SSMD mode takes many equal actions taken on different data and executes them as one. If it encounters a multiplication for example then it handles the multiplication in loop, if available with SIMD instructions, over all datasegments at once before reading the next token. This would not have been possible to do with the code that was written in c# to handle a single action and often is much faster to execute especially when there are many datasegments. Offcoarse, you could hand-optimize each actions;s .net code to also have a path to execute many but that adds complexity, mantainance and you loose configurability. Many games these days are defined by configuration and blast allow for higher performance or lower battery use.
 
 ### Features 
 
