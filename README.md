@@ -5,8 +5,6 @@
 
 [Language Reference](LanguageReference.md) - [Namespace (doxygen)](Namespace/_Sidebar.md) - [Examples](examples.md)
 
-BLAST is a runtime bytecode compiler & interpretor that can interpret scripts from burst compiled code.
-
 ## SSMD
 ### Single Script Multiple Data
 
