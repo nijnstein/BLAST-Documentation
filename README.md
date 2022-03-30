@@ -29,8 +29,6 @@ In many situations things boil down to a handler executing actions, either prede
 - Interpretation is BURST compatible.
 - Unmatched performance. 
 
-<img width="80%" alt="BLAST with BURST" src="https://user-images.githubusercontent.com/96932314/149854610-540e2ae4-2cb8-4502-8db4-b3b3ed9a4c71.PNG">
-
 ### Code Structure 
 
 [The BLAST Namespace](https://github.com/nijnstein/BLAST-Documentation/blob/main/Documentation/N_NSS_Blast.md)
