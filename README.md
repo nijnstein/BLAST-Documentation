@@ -37,9 +37,9 @@ In many situations things boil down to a handler executing actions, either prede
 
 #### Variables 
 
-Variables dont need to be defined although users might want to force usage of the ID datatype. All data starts out as a float in BLAST and either grows into vectors or gets converted/defined as an ID. For blast its assumed that float is the prefered datatype.
+Variables dont need to be defined although users might want to force their order in the datasegment using input defines.
 
-Currently a variable is promoted to an id by use of a function: `a_as_id = ID64;  a_as_id = ID64(value); `, functions in blast may convert datatypes and allow us to cleanly configure datatypes used outside the interpretor. Leveraging this we could release float or ID only interpretors for maximum speed in the future. 
+All data starts out as a float in BLAST and either grows into vectors or gets converted/defined as something else.  
 
 #### Statements 
 
