@@ -366,7 +366,7 @@ If yield is used, all memory used for script execution must map to the IComponen
 
 #### SSMD 
 
-The scripts datasegment is packed as with entities but not matched to any structure, it might also not be complete depending on any constant data in it. In SSMD mode there is no stack allocated in the datasegment and in the future it will inline any constant data in the code datastream to maximize memory efficiency when running many billions of scripts each second.
+The scripts datasegment is packed as with entities but not matched to any structure, it might also not be complete depending on any constant data in it. In SSMD mode there is no stack allocated in the datasegment and it can inline any constant data in the code datastream to maximize memory efficiency when running many billions of scripts each second.
 
 ##### Yield
 Yield is not supported yet. 
