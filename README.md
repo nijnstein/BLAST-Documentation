@@ -29,17 +29,15 @@ In many situations things boil down to a handler executing actions, either prede
 - Interpretation is BURST compatible.
 - Unmatched performance. 
 
-<img width="80%" alt="BLAST with BURST" src="https://user-images.githubusercontent.com/96932314/149854610-540e2ae4-2cb8-4502-8db4-b3b3ed9a4c71.PNG">
-
 ### Code Structure 
 
 [The BLAST Namespace](https://github.com/nijnstein/BLAST-Documentation/blob/main/Documentation/N_NSS_Blast.md)
 
 #### Variables 
 
-Variables dont need to be defined although users might want to force usage of the ID datatype. All data starts out as a float in BLAST and either grows into vectors or gets converted/defined as an ID. For blast its assumed that float is the prefered datatype.
+Variables dont need to be defined although users might want to force their order in the datasegment using input defines.
 
-Currently a variable is promoted to an id by use of a function: `a_as_id = ID64;  a_as_id = ID64(value); `, functions in blast may convert datatypes and allow us to cleanly configure datatypes used outside the interpretor. Leveraging this we could release float or ID only interpretors for maximum speed in the future. 
+All data starts out as a float in BLAST and either grows into vectors or gets converted/defined as something else.  
 
 #### Statements 
 
