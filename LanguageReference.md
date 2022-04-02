@@ -2,6 +2,8 @@
 
 # BLAST Language Reference 
 
+**NOTE** We found several bugs with the help of others and we uploaded a new version to the asset store which will be available for download by monday 4-4;' This version fixes a bug regarding constant mapping to datasegments.
+
 **DISCLAIMER** BLAST is new, partly experimental and under active development, bugs are to be expected and please create an issue for any issue there might be so we can handle it as quickly as possible. 
 
 Issues: https://github.com/nijnstein/BLAST-Documentation/issues
