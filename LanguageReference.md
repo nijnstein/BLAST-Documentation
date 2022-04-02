@@ -236,6 +236,39 @@ The only datatype fully supported is the float of vectorsize 1 to 4. There is pa
 |unlerp||||
 
 
+### Bit|Bool32 Operations 
+
+```csharp
+
+#input flags bool32 11001100_11001100_11001100_11001100; 
+
+# operations that return true|false 
+a = count_bits(flags); 
+a = lzcnt(flags);
+a = tzcnt(flags); 
+a = get_bit(flags, 1); 
+a = get_bits(flags, 11111111_00000000_11111111_00000000, true);
+
+# both any and all support multiple parameters as long as all are bool32
+a = any(flags);  
+a = all(flags); 
+
+# operations that work in place
+set_bit(flags, 1, true); 
+set_bit(flags, 2, a);
+set_bits(flags, 11111111_00000000_11111111_00000000, true);
+reverse_bits(flags); 
+rol(flags, 1); 
+ror(flags, 1); 
+shr(flags, 1); 
+shl(flags, 1); 
+
+# reinterpret the data at a as a bool32, set metadata of a to type Bool32 and vectorsize 1
+reinterpret_bool32(a);
+
+``` 
+
+
 
 ### Inline Functions
 
