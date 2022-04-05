@@ -103,7 +103,8 @@ Assingment: `=`
 
 Comparisons: ` = < <= > >= != `
 
-Indexing: .[x|y|z|w|r|g|b|a]
+Indexing: .[x|y|z|w|r|g|b|a] or [index] (operations other then stackpop are not supported in indexers)
+
 
 ### Constant data 
 First off, there is no constant analysis used for removing unneeded constant statements, future versions might decide to remove constant statements leading to unused values but for now blast wont botter.
