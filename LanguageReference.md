@@ -103,7 +103,7 @@ Assingment: `=`
 
 Comparisons: ` = < <= > >= != `
 
-Indexing: .[x|y|z|w|r|g|b|a] or [index] (operations other then stackpop are not supported in indexers)
+Indexing: .[x|y|z|w|r|g|b|a] 
 
 
 ### Constant data 
