@@ -170,9 +170,11 @@ The only datatype fully supported is the float of vectorsize 1 to 4. There is pa
 - Future versions will add integer datatypes.
 
 #### CDATA Sections 
+supported from v1.0.4
 
 CData isnt a real datatype but just constant length data that later can be interpreted to be a fixed array of the requested type:
 
+Scriptcode: 
 ```csharp
 #cdata a 14.42 344.4 54444.345 22190 
 #cdata msg 'cmd_or_msg_or_log' 
@@ -185,17 +187,27 @@ if(b = 22190) then
     send(msg);       # send data to some sink, for now the log 
 )
 ```
+
+Bytecode: 
 ```
-# cdata section start  + data, whole codeblock = 69 bytes
-000| 028 040 **074** 000 016 _082 184 102 065 051 _
-010| _051 172 067 088 172 084 071 000 092 173 
-020| 070 _ **074** 000 017 _099 109 100 095 111 114  _
-030| _095 109 115 103 095 111 114 095 108 111 _
-040| _103 _001 128 073 075 000 043 009 085 000 
+000| 028 040 074 000 016 082 184 102 065 051 
+010| 051 172 067 088 172 084 071 000 092 173 
+020| 070 074 000 017 099 109 100 095 111 114  
+030| 095 109 115 103 095 111 114 095 108 111 
+040| 103 001 128 073 075 000 043 009 085 000 
 050| 003 128 060 075 000 052 128 026 012 024 
 060| 128 020 129 025 024 076 075 000 046 025 
 ```
 
+Somewhat readable assembly
+```
+jump 40 cdata[16] #082 #184 #102 #065 #051 #051 #172 #067 
+#088 #172 #084 #071 #000 #092 #173 #070 cdata[17] #099 
+#109 #100 #095 #111 #114 #095 #109 #115 #103 #095 #111
+#114 #095 #108 #111 #103 set b size cdataref #000 #043
+- 1 nop setf b idx_N #075 #000  52 b jz 12 ( b = 22190 ) 
+( send cdataref #000 #046 )
+```
 
 CData can be defined in 2 distinct ways:
 
