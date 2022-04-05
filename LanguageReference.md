@@ -168,6 +168,48 @@ The only datatype fully supported is the float of vectorsize 1 to 4. There is pa
 
 - Future versions will add integer datatypes.
 
+#### CDATA Sections 
+
+CData isnt a real datatype but just constant length data that later can be interpreted to be a fixed array of the requested type:
+
+```
+#cdata a 14.42 344.4 54444.345 22190 
+#cdata msg 'cmd_or_msg_or_log' 
+
+b = size(a) - 1;     # as float is the default datatype, size returns 5 while the bytesize is 20 
+b = a[b];            # again, float = default, and a is indexed as float[]
+
+if(b = 22190) then 
+(
+    send(msg);       # send data to some sink, for now the log 
+)
+```
+
+CData can be defined in 2 distinct ways:
+
+**Constant CDATA**
+**v1.0.4**
+Constant cdata is data that is inlined into the codesegment and for normal use should be constant: 
+
+```
+#cdata a 14.42 344.4 54444.345 22190 
+#cdata a 'abcd'
+#cdata a 11110111_11101110_10111111_00110011 11110111_11101110_10111111_00110011 
+```
+
+**Variable CDATA**
+**v1.0.5**
+Variable cdata is data that is allocated in the datasegment and can be set as parameter to the script through input defines.
+``` 
+#input msg cdata 'some message for exceptional events'
+```
+
+##### Shared CDATA
+**v1.0.4**
+
+CData defined to be inlined as constant is actually shared among all executions of that script using the same scriptpackage. 
+
+For now this is allowed by default but we might decide to force the user to enable this behaviour through compileroptions|defines.
 
 ### Built in functions 
    [Functions]: /url "Script API Functions"
