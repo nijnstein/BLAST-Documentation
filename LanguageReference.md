@@ -185,6 +185,7 @@ if(b = 22190) then
     send(msg);       # send data to some sink, for now the log 
 )
 ```
+```
 # cdata section start  + data, whole codeblock = 69 bytes
 000| 028 040 **074** 000 016 _082 184 102 065 051 _
 010| _051 172 067 088 172 084 071 000 092 173 
