@@ -244,9 +244,6 @@ Dont allocate package memory for stacks, instead uses interpretor's stack.
 
 ##### Mapping to IComponentData
 
-![BLAST dots overview - black background](https://user-images.githubusercontent.com/96932314/151461179-9ddb3104-c36f-41a7-a25d-f253f07fba0b.png)
-
-
 ##### Communication through external fucntions
 
 
