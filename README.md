@@ -200,7 +200,7 @@ To perform the multiplication between 2 variables in a datasegment that is align
 <img width="356" alt="mul_loop_indexed_aligned" src="https://user-images.githubusercontent.com/96932314/163287736-420f3b75-1402-4905-b8e8-e18240ae432a.PNG">
 
 **Register float * constant **
-The result is multiplied in a register (of the interpretor) with a constant, blast knows to execute the move only once, undependant of the number of records:
+The result is multiplied in a register (of the interpretor) with a constant, blast knows to execute the move only once, undependant of the number of records. In future version the ssmd interpretor will call a value constant if its equal acros the input, it can then apply these optmizations each run based on the data given, this is an optimization that would normally be very difficult to cleanly achieve. 
 
 <img width="304" alt="mul_a_constant" src="https://user-images.githubusercontent.com/96932314/163287954-f37dbd27-9fd5-43fa-aa26-ab3e5a32c280.PNG">
 
