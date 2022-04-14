@@ -189,6 +189,26 @@ Different package modes for different needs:
 ``` 
 - Compiler: mode for internal and debugging purposes, this will maintain a node tree and variable overviews.
 
+#### Data Alignment 
+
+When blast encounters the following equation: a = a * b * 4, the depending on alignment or not the following assembly is executed in burst (only important parts are shown)
+
+**Aligned float * float **
+
+To perform the multiplication between 2 variables in a datasegment that is aligned:
+
+<img width="356" alt="mul_loop_indexed_aligned" src="https://user-images.githubusercontent.com/96932314/163287736-420f3b75-1402-4905-b8e8-e18240ae432a.PNG">
+
+**Register float * constant **
+The result is multiplied in a register (of the interpretor) with a constant, blast knows what to execute:
+
+<img width="304" alt="mul_a_constant" src="https://user-images.githubusercontent.com/96932314/163287954-f37dbd27-9fd5-43fa-aa26-ab3e5a32c280.PNG">
+
+The datasegment and stack are setup as arrays of arrays and are said to be aligned when each basepointer of the subarrays has the same offset to the other. If thats not the case we call the data unaligned and blast has to calculate each base index resuling in un-packed instructions but still very fast code:
+
+<img width="332" alt="mul_loop_indexed_unaligned" src="https://user-images.githubusercontent.com/96932314/163288176-e1880f9d-6521-4319-887d-42c6e4be70a2.PNG">
+
+The effect of alignment on processing speed can be seen in sample 10, after all cubes have gotten different states and thus run different scripts, the interpretor gets datasegment arrays with indices skipping because they are for other scripts. It can be up to 3 times slower to work with unaligned datasegments but it very much depends on the script involved. As a programmer you should know this happens and you can compensate by writing|using your code differently if it gives problems. It still is fast and still uses simd instructions in most cases.
 
 ##### HPC Compilation
 
