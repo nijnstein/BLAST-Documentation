@@ -96,19 +96,7 @@ Vectors may be defined based on all supported datatypes and functions, constant 
 - The minimal support will (in all languageversions) be: size 1, 2, 3 and 4; other sizes are under discussion as the current encoding schema allows for only 8 different lengths (8 differing lengths, not max 8)
 
 #### Language Versions
-Different language versions allow the interpretor(s) to differntiate between very distinct outputs depending on compiler settings. 
-
-##### BS1 
-
-
-
-##### BS2
-
-
-
-##### HPC
-
-
+Different language versions allow the interpretor(s) to differentiate between very distinct outputs depending on compiler settings. 
 
 #### Script Tokens
 
@@ -161,14 +149,6 @@ All other text that starts with # is a comment and may start at any point of a l
 
 #### Compiler Settings 
 
-##### Optimizer 
-Enable the optimizing functions of the compiler:
-
-- Node Optimizer -> converts sequences of operations into more efficient operations after the ast has been made flat.
-- **Deprecated** Bytecode Optimizer -> pattern recognition and replacement for optimized execution, improvements in the node analyzer will probably make it less and less usefull, but still it can perform optimizations fast compared to deeper methods of analyzing/optimizing.
-- **V3** AST Optimizer -> operates on node structure and will optimize more complex patterns accross multiple nodes.
-
-
 ##### PackageMode
 Different package modes for different needs: 
 
@@ -210,7 +190,7 @@ The datasegment and stack are setup as arrays of arrays and are said to be align
 
 The effect of alignment on processing speed can be seen in sample 10, after all cubes have gotten different states and thus run different scripts, the interpretor gets datasegment arrays with indices skipping because they are for other scripts. It can be up to 3 times slower to work with unaligned datasegments but it very much depends on the script involved. As a programmer you should know this happens and you can compensate by writing|using your code differently if it gives problems. It still is fast and still uses simd instructions in most cases.
 
-##### HPC Compilation
+#### HPC Compilation
 
 **Not supported in current release**
 
@@ -255,29 +235,11 @@ class BlastScripts
 ```
 
 
-##### NoStack 
-Dont allocate package memory for stacks, instead uses interpretor's stack.
-
-#### Data Access 
-
-##### Direct Data|Stack Access
-
-##### Mapping to IComponentData
-
-##### Communication through external fucntions
+#### TLS - PackageOption.PackageNoStack
+Dont allocate package memory for stacks, instead use the interpretor's stack. When processing many data records in ssmd mode then memory becomes a serious limitation. If the script is small and the data is small they should be packeged together easily fitting many in cpu cache. When there is more data at some point the cpus cache will be the limiting factor, especially when running multiple threads. If the stack is mapped to the stackmemory of the interpretor the cpu will swap less memory in and out when processing large amounts of records. This is easily seen in the following video (a .net build) https://youtu.be/FnEtQ0tWAto As soon as the stack spans multiple cache lines it becomes very benificial to use the threads stack allowing it to make full use of multithreading. Note that for very small scripts this actually hurts performance as code and data or not on the same cacheline anymore (usually above 64byte|128bytes)
 
 
-#### Interpretor 
-
-##### SSMD Operation
-
-#### Error Handling 
-
-
-
-### Functions 
-
-#### Built in
+#### Most math functions built in 
 
 Built in functions are directly encoded in opcodes and are made available to blast in the form of a BlastScriptAPI class. Several math functions have been built in and many other functions will follow. 
 
