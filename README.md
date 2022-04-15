@@ -29,6 +29,21 @@ In many situations things boil down to a handler executing actions, either prede
 - Interpretation is BURST compatible.
 - Unmatched performance. 
 
+### Example
+An equation like a = (3 3) * (4 4) + (1.2 1.2); results in only 18 bytes of code, 4 bytes of data and 8 bytes of stack use, resulting in a block of 30 bytes, easily fitting into a single cache line ensuring maximum performce running this as a kernel over large datasets: 
+
+```csharp
+# code
+a = (3 3) * (4 4) + (1.2 1.2);
+
+# ssmd assembly 
+push vector cf1 #154 #153 #153 #063 csref #006 set a expand_v2 3 * expand_v2 4 + pop 
+
+# bytecode 
+000| 035 034 064 154 153 153 063 066 006 001 
+010| 128 061 087 011 061 088 008 034  
+```
+
 ### Code Structure 
 
 [The BLAST Namespace](https://github.com/nijnstein/BLAST-Documentation/blob/main/Documentation/N_NSS_Blast.md)
