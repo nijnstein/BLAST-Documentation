@@ -5,7 +5,7 @@
 
 [Language Reference](LanguageReference.md) - [Namespace (doxygen)](Namespace/_Sidebar.md) - [Examples](examples.md)
 
-**Disclaimer:** This is a partly experimetal package, anything listed in the documentation is guaranteed to be supported indefinately, the rest is under active development and very open for suggestions. Please log any issues at https://github.com/nijnstein/BLAST-Documentation/issues so we can handle them as efficiently as possible.
+**Disclaimer:** This is a partly experimental package, anything listed in the documentation is guaranteed to be supported indefinately, the rest is under active development and very open for suggestions. Please log any issues at https://github.com/nijnstein/BLAST-Documentation/issues so we can handle them as efficiently as possible.
 
 ## SSMD
 ### Single Script Multiple Data
