@@ -172,7 +172,12 @@ The only datatype fully supported is the float of vectorsize 1 to 4. There is pa
 #### CDATA Sections 
 supported from v1.0.4
 
-CData isnt a real datatype but just constant length data that later can be interpreted to be a fixed array of the requested type:
+CData isnt a real datatype but just constant length data that later can be interpreted to be a fixed array of the requested type. CDATA sections will provide backing memory for constantly sized arrays. When located in the code segment they are assumed to be constant during the current frame and shared among all executions of that script. 
+
+** v1.1 ** Later versions will allow CDATA sections in the datasegment (restricted to max 127 elements) or externally pointed to by a native pointer.
+
+** v1.0.5 ** The SSMD interpretor will be able to loop over CDATA sections as they are constantly sized as long as the iterator is not conditionally increased and the loop condition itself is constant. As the data is expected to be constant during the current frame large optimizations become possible for the ssmd interpretor as it can expand its results over all components in vectors that result in constant operations based on the fact that CDATA is constant for the current calculation frame. (ie: deltatime is the same in all scripts during the whole frame)
+
 
 Scriptcode: 
 ```csharp
@@ -227,6 +232,24 @@ Variable cdata is data that is allocated in the datasegment and can be set as pa
 ``` 
 #input msg cdata 'some message for exceptional events'
 ```
+
+##### CDATA backing memory 
+**v1.0.5** 
+CDATA arrays are stored in the smallest bytesize allowed without losing precision beyond the constantepsilon value configurable through compiler options. During compilation the compiler will decide the lowest usable bytesize for the values in the constant data. Users an also type cdata as to avoid this behaviour. 
+
+Encoding types: 
+|name|backing|variable type|
+|----|-------|-------------|
+|None|float32|-------------|
+|u8_fp32|unsigned byte|float32|
+|s8_fp32|signed byte|float32| 
+|fp8_fp32|8 bit floating point|float32|
+|fp16_fp32|16 half|float32|
+|fp32_fp32|float32|float32| 
+|u_i32|unsigned byte|int32|
+|i8_i32|signed byte|int32|
+|i16_i32|signed short|int32|
+|i32_i32|signed int32|int32|
 
 ##### Shared CDATA
 **v1.0.4**
