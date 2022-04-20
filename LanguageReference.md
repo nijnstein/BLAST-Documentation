@@ -246,7 +246,7 @@ Encoding types:
 |fp8_fp32|8 bit floating point|float32|
 |fp16_fp32|16 half|float32|
 |fp32_fp32|float32|float32| 
-|u_i32|unsigned byte|int32|
+|u8_i32|unsigned byte|int32|
 |i8_i32|signed byte|int32|
 |i16_i32|signed short|int32|
 |i32_i32|signed int32|int32|
