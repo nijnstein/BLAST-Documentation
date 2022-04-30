@@ -264,7 +264,7 @@ For now this is allowed by default but we might decide to force the user to enab
   
 
  Index    FID   FunctionName                     Operation    Extended Op  
---------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
      3      3   yield                            yield        nop         
      4      4   pop                              pop          nop         
      5      5   peek                             peek         nop         
