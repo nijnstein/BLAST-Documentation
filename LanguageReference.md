@@ -263,64 +263,129 @@ For now this is allowed by default but we might decide to force the user to enab
 * note: the optimizer will replace sequences with its equivevalent function whenever possible providing shorter code and faster execution due to reduced control flow. 
   
 
-|function|description|parameters|returns|examples|
-|--------|-----------|----------|-------|--------|
-|abs|get absolute value of operand| 1 numeric vector | vector  | |
-|adda|add all operands in sequence| n numerics of equal vectorsize | vector | |
-|all|returns true if all arguments are true| n value of n vectorsizes | scalar | |
-|any|returns true if any argument is true|n values of n vectorsizes | scalar | | 
-|atan|unity.mathematics.atan|any vectorsize|vector| |
-|atan2|unity.mathematics.atan2|any vectorsize|vector| |
-|ceil||||
-|clamp||||
-|ceillog2||||
-|ceilpow2||||
-|cos|unity.mathematics.cos|any vectorsize|vector ||
-|cosh|unity.mathematics.cos|any vectorsize|vector ||
-|cross|unity.mathematics.cross|vector 3|vector 3||
-|csum|unity.mathematics.csum|any vectorsize|scalar| |
-|call|explicetly call a function||[call](call-external.md)|
-|debug||||
-|debugstack||||
-|degrees||||
-|diva|divide all operands by eachother in sequence|any vectorsize|vector||
-|dot||||
-|exp||||
-|exp10||||
-|floor||||
-|floorlog2||||
-|fma||||
-|fmod||||
-|frac||||
-|lerp||||
-|log10||||
-|log2||||
-|logn||||
-|max|||||
-|maxa|get max value from operands|any vectorsize|vector||
-|min||||
-|mina||||
-|mula|multiply all operands in sequence|any vectorsize|vector||
-|nlerp||||
-|normalize||||
-|pow||||
-|radians||||
-|random|generate a random number|||
-|remap||||
-|reinterpret_bool32||||
-|reinterpret_float||||
-|rsqrt||||
-|saturate||||
-|seed|seed the random number generator|||
-|select||||
-|sin||||
-|sinh||||
-|slerp||||
-|sqrt||||
-|suba|substract all operands from eachother in sequence|any vectorsize|vector||
-|tan||||
-|trunc||||
-|unlerp||||
+ Index    FID   FunctionName                     Operation    Extended Op  
+--------------------------------------------------------------------------------
+     3      3   yield                            yield        nop         
+     4      4   pop                              pop          nop         
+     5      5   peek                             peek         nop         
+     6      6   seed                             ex_op        seed        
+     7      7   push                             push         nop         
+     8      8   pushf                            pushf        nop         
+     9      9   pushc                            pushc        nop         
+    10     10   pushv                            pushv        nop         
+    11     11   debug                            ex_op        debug       
+    12     12   debugstack                       ex_op        debugstack  
+    13     13   validate                         ex_op        validate    
+    32     32   return                           ret          nop         
+    33     33   abs                              abs          nop         
+    34     34   min                              min          nop         
+    35     35   max                              max          nop         
+    36     36   mina                             mina         nop         
+    37     37   maxa                             maxa         nop         
+    38     38   any                              any          nop         
+    39     39   all                              all          nop         
+    40     40   adda                             adda         nop         
+    41     41   suba                             suba         nop         
+    42     42   diva                             diva         nop         
+    43     43   mula                             mula         nop         
+    44     44   fma                              fma          nop         
+    45     45   fmod                             ex_op        fmod        
+    46     46   trunc                            trunc        nop         
+    47     47   csum                             csum         nop         
+    48     48   select                           select       nop         
+    49     49   random                           random       nop         
+    50     50   idx                              index_x      nop         
+    51     51   idy                              index_y      nop         
+    52     52   idz                              index_z      nop         
+    53     53   idw                              index_w      nop         
+    54     54   idxn                             index_n      nop         
+    55     55   expand2                          expand_v2    nop         
+    56     56   expand3                          expand_v3    nop         
+    57     57   expand4                          expand_v4    nop         
+    58     58   sin                              ex_op        sin         
+    59     59   cos                              ex_op        cos         
+    60     60   tan                              ex_op        tan         
+    61     61   atan                             ex_op        atan        
+    62     62   atan2                            ex_op        atan2       
+    63     63   cosh                             ex_op        cosh        
+    64     64   sinh                             ex_op        sinh        
+    65     65   degrees                          ex_op        degrees     
+    66     66   rad                              ex_op        radians     
+    67     67   sqrt                             ex_op        sqrt        
+    68     68   rsqrt                            ex_op        rsqrt       
+    69     69   pow                              ex_op        pow         
+    70     70   normalize                        ex_op        normalize   
+    71     71   saturate                         ex_op        saturate    
+    72     72   clamp                            ex_op        clamp       
+    73     73   log2                             ex_op        log2        
+    74     74   log10                            ex_op        log10       
+    75     75   log                              ex_op        logn        
+    76     76   exp                              ex_op        exp         
+    77     77   exp10                            ex_op        exp10       
+    78     78   cross                            ex_op        cross       
+    79     79   dot                              ex_op        dot         
+    80     80   ceil                             ex_op        ceil        
+    81     81   floor                            ex_op        floor       
+    82     82   frac                             ex_op        frac        
+    83     83   lerp                             ex_op        lerp        
+    84     84   slerp                            ex_op        slerp       
+    85     85   nlerp                            ex_op        nlerp       
+    86     86   unlerp                           ex_op        unlerp      
+    87     87   remap                            ex_op        remap       
+    88     88   ceillog2                         ex_op        ceillog2    
+    89     89   floorlog2                        ex_op        floorlog2   
+    90     90   ceilpow2                         ex_op        ceilpow2    
+    91     91   set_bits                         ex_op        set_bits    
+    92     92   set_bit                          ex_op        set_bit     
+    93     93   get_bits                         ex_op        get_bits    
+    94     94   get_bit                          ex_op        get_bit     
+    95     95   count_bits                       ex_op        count_bits  
+    96     96   reverse_bits                     ex_op        reverse_bits
+    97     97   shl                              ex_op        shl         
+    98     98   shr                              ex_op        shr         
+    99     99   rol                              ex_op        rol         
+   100    100   ror                              ex_op        ror         
+   101    101   lzcnt                            ex_op        lzcnt       
+   102    102   tzcnt                            ex_op        tzcnt       
+   103    103   zero                             zero         nop         
+   104    104   clear_bits                       zero         nop         
+   105    105   reinterpret_int32                ex_op        reinterpret_int32
+   106    106   reinterpret_bool32               ex_op        reinterpret_bool32
+   107    107   reinterpret_float32              ex_op        reinterpret_float
+   108    108   send                             ex_op        send        
+   109    109   size                             size         nop         
+   110    110   length                           ex_op        length      
+   111    111   lengthsq                         ex_op        lengthsq    
+   112    112   square                           ex_op        square      
+   113    113   distance                         ex_op        distance    
+   114    114   distancesq                       ex_op        distancesq  
+   115    115   reflect                          ex_op        reflect     
+   116    116   project                          ex_op        project     
+   117    117   up                               ex_op        up          
+   118    118   down                             ex_op        down        
+   119    119   forward                          ex_op        forward     
+   120    120   back                             ex_op        back        
+   121    121   left                             ex_op        left        
+   122    122   right                            ex_op        right       
+   123    123   eulerxyz                         ex_op        EulerXYZ    
+   124    124   eulerxzy                         ex_op        EulerXZY    
+   125    125   euleryxz                         ex_op        EulerYXZ    
+   126    126   euleryzx                         ex_op        EulerYZX    
+   127    127   eulerzxy                         ex_op        EulerZXY    
+   128    128   eulerzyx                         ex_op        EulerZYX    
+   129    129   euler                            ex_op        Euler       
+   130    130   quaternionxyz                    ex_op        QuaternionXYZ
+   131    131   quaternionxzy                    ex_op        QuaternionXZY
+   132    132   quaternionyxz                    ex_op        QuaternionYXZ
+   133    133   quaternionyzx                    ex_op        QuaternionYZX
+   134    134   quaternionzxy                    ex_op        QuaternionZXY
+   135    135   quaternionzyx                    ex_op        QuaternionZYX
+   136    136   quaternion                       ex_op        Quaternion  
+   137    137   lookrotation                     ex_op        LookRotation
+   138    138   lookrotationsafe                 ex_op        LookRotationSafe
+   139    139   rotate                           ex_op        Rotate      
+   140    140   angle                            ex_op        Angle       
+   141    141   mul                              ex_op        Mul         
 
 
 ### Bit|Bool32 Operations 
